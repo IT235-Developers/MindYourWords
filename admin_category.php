@@ -106,6 +106,7 @@ if (isset($_POST['btn_addLevel'])) {
                             <form action="admin_level.php" method="POST">
                                 <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
                                 <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
+                                <input type="hidden" name="txt_levelName" value="<?= $row['levelName'] ?>">
                                 <button type="submit" class="category_level_container rounded text-center bg-white">
                                     <p><?= $row['levelName'] ?></p>
                                 </button>
