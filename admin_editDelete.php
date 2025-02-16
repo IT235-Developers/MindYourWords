@@ -2,6 +2,7 @@
 session_start();
 include("connection.php");
 include("conn2.php");
+include("functions.php");
 
 // Flash message functions
 function setFlashMessage($type, $message) {
@@ -93,26 +94,13 @@ function displayFlashMessage() {
             } elseif (isset($_POST['btn_deleteQuestion'])) {
                 $levelID = $_POST['txt_levelHID'];
                 $questionID = $_POST['txt_questionHID'];
+                $categoryID = $_SESSION['categoryID'];
 
-                $sqlGet = "SELECT * FROM questions WHERE questionID = $questionID";
-                $resGet = $con->query($sqlGet);
-
-                if ($resGet->num_rows > 0) {
-                    $row = $resGet->fetch_assoc();
-                    $sqlInsert = "INSERT INTO questions (levelID, word, sampleSentence, definition) VALUES ({$row['levelID']}, '{$row['word']}', '{$row['sampleSentence']}', '{$row['definition']}')";
-
-                    if ($con2->query($sqlInsert) === TRUE) {
-                        $sqlDelete = "DELETE FROM questions WHERE questionID = '$questionID'";
-
-                        if ($con->query($sqlDelete) === TRUE) {
-                            setFlashMessage('success', 'Question deleted successfully.');
-                        } else {
-                            setFlashMessage('danger', 'Failed to delete question.');
-                        }
-                    }
-                } else {
-                    setFlashMessage('warning', 'Question not found for deletion.');
-                }
+                archiveCategoryIfNotExist($categoryID, $con, $con2);
+                archiveLevels($categoryID, $con, $con2);
+                archiveQuestion($questionID, $con, $con2);
+                deleteQuestionFromMainDb($questionID, $con);
+                
                 header("Location: admin_level.php");
                 exit();
             }

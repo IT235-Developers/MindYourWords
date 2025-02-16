@@ -32,6 +32,20 @@ function archiveLevels($categoryID, $con, $con2) {
     }
 }
 
+function archiveQuestion($questionID, $con, $con2) {
+    $sqlGet = "SELECT * FROM questions WHERE questionID = $questionID";
+    $resGet = $con->query($sqlGet);
+
+
+    if ($resGet->num_rows > 0) {
+        $row = $resGet->fetch_assoc();
+        $sqlInsert = "INSERT INTO questions (levelID, word, sampleSentence, definition) VALUES ({$row['levelID']}, '{$row['word']}', '{$row['sampleSentence']}', '{$row['definition']}')";
+        $con2->query($sqlInsert);
+    } else {
+        setFlashMessage('warning', 'Question not found for deletion.');
+    }
+}
+
 function archiveQuestionsByLevelId($levelID, $con, $con2) {
     $getQuestions = "SELECT * FROM questions WHERE levelID = $levelID";
     $resQuestions = $con->query($getQuestions);
@@ -70,6 +84,16 @@ function deleteCategoryFromMainDb($categoryID, $con) {
         setFlashMessage('success', 'Category deleted successfully'); 
     } else {
         setFlashMessage('warning', 'Something went wrong');
+    }
+}
+
+function deleteQuestionFromMainDb($questionID, $con) {
+    $sqlDelete = "DELETE FROM questions WHERE questionID = '$questionID'";
+
+    if ($con->query($sqlDelete) === TRUE) {
+        setFlashMessage('success', 'Question deleted successfully.');
+    } else {
+        setFlashMessage('danger', 'Failed to delete question.');
     }
 }
 
