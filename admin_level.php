@@ -53,7 +53,7 @@ if (isset($_POST['btn_deleteLevel'])) {
 
     archiveCategoryIfNotExist($categoryID, $con, $con2);
     archiveLevels($categoryID, $con, $con2);
-    archiveQuestions($levelID, $con, $con2);
+    archiveQuestionsByLevelId($levelID, $con, $con2);
     deleteLevelFromMainDb($levelID, $con);
 
     header("Location: admin_category.php");

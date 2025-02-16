@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("conn2.php");
+include("functions.php");
 
 // Flash message function
 function setFlashMessage($type, $message) {
@@ -54,6 +56,20 @@ if (isset($_POST['btn_addLevel'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
+
+if (isset(($_POST['btn_deleteCategory']))) {
+    $categoryID = $_SESSION['categoryID'];
+    $levelName = $_SESSION['levelName'];
+
+    archiveCategoryIfNotExist($categoryID, $con, $con2);
+    archiveLevels($categoryID, $con, $con2);
+    archiveAllQuestions($categoryID, $con, $con2);
+    deleteCategoryFromMainDb($categoryID, $con);
+
+    header("Location: admin_homepage.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>

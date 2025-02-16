@@ -2,6 +2,22 @@
 session_start(); // Start session at the top of the script
 include("connection.php");
 
+function setFlashMessage($type, $message) {
+    $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+}
+
+function displayFlashMessage() {
+    if (isset($_SESSION['flash'])) {
+        $type = $_SESSION['flash']['type'];
+        $message = $_SESSION['flash']['message'];
+        echo "<div class='alert alert-$type alert-dismissible fade show' role='alert'>
+                $message
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+              </div>";
+        unset($_SESSION['flash']); // Clear message after displaying
+    }
+}
+
 if (isset($_POST['btn_addCategory'])) {
     $category = $_POST['txt_category'];
 
@@ -53,6 +69,9 @@ if (isset($_POST['btn_addCategory'])) {
                     </form>
                 </div>
                 <button onclick="showForm()" class="btn_add"> + Add Category</button>
+
+                <!-- Display flash message when deleting category -->
+                <?php displayFlashMessage(); ?>
 
                 <!-- Flash Message -->
                 <?php if (isset($_SESSION['flash_message'])): ?>
