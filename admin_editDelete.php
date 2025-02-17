@@ -61,19 +61,19 @@ function displayFlashMessage() {
                             <tr>
                                 <td><label for='txt_editWord'>Word:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editWord' value='<?= $row['word'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editWord' value='<?= htmlspecialchars($row['word'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label for='txt_editExample'>Example:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editExample' value='<?= $row['sampleSentence'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editExample' value='<?= htmlspecialchars($row['sampleSentence'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label for='txt_editDescription'>Definition:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editDescription' value='<?= $row['definition'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editDescription' value='<?= htmlspecialchars($row['definition'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
