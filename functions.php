@@ -86,8 +86,13 @@ function archiveQuestionsByLevelId($levelID, $con, $con2) {
             $word = mysqli_real_escape_string($con2, $row['word']);
             $sampleSentence = mysqli_real_escape_string($con2, $row['sampleSentence']);
             $definition = mysqli_real_escape_string($con2, $row['definition']);
-            $sqlInsertQuestionsToArchive = "INSERT INTO questions(questionID, levelID, word, sampleSentence, definition) VALUES({$row['questionID']}, {$row['levelID']}, '$word', '$sampleSentence', '$definition')";
-            $con2->query($sqlInsertQuestionsToArchive);
+            $sqlCheckQuestionInArchive = "SELECT * FROM questions WHERE questionID = {$row['questionID']}";
+            $resCheckQuestionInArchive = $con2->query($sqlCheckQuestionInArchive);
+
+            if ($resCheckQuestionInArchive->num_rows == 0) {
+                $sqlInsertQuestionsToArchive = "INSERT INTO questions(questionID, levelID, word, sampleSentence, definition) VALUES({$row['questionID']}, {$row['levelID']}, '$word', '$sampleSentence', '$definition')";
+                $con2->query($sqlInsertQuestionsToArchive);
+            }
         }
     }
 }
