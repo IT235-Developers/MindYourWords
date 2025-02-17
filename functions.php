@@ -27,15 +27,22 @@ function archiveLevel($levelID, $con, $con2) {
     if ($resCheckLevel->num_rows > 0) {
         $row = $resCheckLevel->fetch_assoc();
 
-        $sqlInsertLevelToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '{$row['levelName']}')";
-        
-        if ($con2->query($sqlInsertLevelToArchive) === TRUE) {
-            return true;
+        $sqlCheckLevelInArchive = "SELECT * FROM level WHERE levelID = {$row['levelID']}";
+        $resCheckLevelInArchive = $con2->query($sqlCheckLevelInArchive);
+
+        if ($resCheckLevelInArchive->num_rows == 0) {
+            $sqlInsertLevelToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '{$row['levelName']}')";
+            
+            if ($con2->query($sqlInsertLevelToArchive) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     } else {
-
+        return false;
     }
 }
 
