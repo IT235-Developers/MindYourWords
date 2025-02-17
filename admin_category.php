@@ -37,7 +37,7 @@ if (isset($_SESSION['categoryID'])) {
 
 // Add new level
 if (isset($_POST['btn_addLevel'])) {
-    $level = $_POST['txt_level'];
+    $level = mysqli_real_escape_string($con, $_POST['txt_level']);
     $categoryHID = $_POST['txt_categoryHID'];
 
     $sqlSelectLevels = "SELECT * FROM level WHERE categoryID = '$categoryHID' AND levelName = '$level'";

@@ -19,7 +19,7 @@ function displayFlashMessage() {
 }
 
 if (isset($_POST['btn_addCategory'])) {
-    $category = $_POST['txt_category'];
+    $category = mysqli_real_escape_string($con, $_POST['txt_category']);
 
     $sqlSelectCategories = "SELECT * FROM category WHERE categoryName = '$category'";
     $resSelectCategories = $con->query($sqlSelectCategories);
