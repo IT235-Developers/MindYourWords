@@ -20,6 +20,25 @@
     }
 }
 
+function archiveLevel($levelID, $con, $con2) {
+    $sqlCheckLevelIfExist = "SELECT * FROM level WHERE levelID = $levelID";
+    $resCheckLevel = $con->query($sqlCheckLevelIfExist);
+
+    if ($resCheckLevel->num_rows > 0) {
+        $row = $resCheckLevel->fetch_assoc();
+
+        $sqlInsertLevelToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '{$row['levelName']}')";
+        
+        if ($con2->query($sqlInsertLevelToArchive) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+
+    }
+}
+
 function archiveLevels($categoryID, $con, $con2) {
     $sqlGetAllLevels = "SELECT * FROM level WHERE categoryID = '$categoryID'";
     $resOfAllLevels = $con->query($sqlGetAllLevels);

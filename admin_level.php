@@ -52,7 +52,7 @@ if (isset($_POST['btn_deleteLevel'])) {
     $levelName = $_SESSION['levelName'];
 
     archiveCategoryIfNotExist($categoryID, $con, $con2);
-    archiveLevels($categoryID, $con, $con2);
+    archiveLevel($levelID, $con, $con2);
     archiveQuestionsByLevelId($levelID, $con, $con2);
     deleteLevelFromMainDb($levelID, $con);
 
