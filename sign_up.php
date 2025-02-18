@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-group">
           <label for="txt_email"></label>
-          <input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
+          <input type="email" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
         </div>
 
         <div class="form-group">
