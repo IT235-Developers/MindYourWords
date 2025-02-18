@@ -61,19 +61,19 @@ function displayFlashMessage() {
                             <tr>
                                 <td><label for='txt_editWord'>Word:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editWord' value='<?= $row['word'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editWord' value='<?= htmlspecialchars($row['word'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label for='txt_editExample'>Example:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editExample' value='<?= $row['sampleSentence'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editExample' value='<?= htmlspecialchars($row['sampleSentence'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label for='txt_editDescription'>Definition:</label></td>
                                 <td colspan='5' width='100%'>
-                                    <input type='text' name='txt_editDescription' value='<?= $row['definition'] ?>' style='width:100%'>
+                                    <input type='text' name='txt_editDescription' value='<?= htmlspecialchars($row['definition'], ENT_QUOTES, 'UTF-8') ?>' style='width:100%'>
                                 </td>
                             </tr>
                             <tr>
@@ -92,9 +92,9 @@ function displayFlashMessage() {
                     exit();
                 }
             } elseif (isset($_POST['btn_deleteQuestion'])) {
-                $levelID = $con->real_escape_string($_POST['txt_levelHID']);
-                $questionID = $con->real_escape_string($_POST['txt_questionHID']);
-                $categoryID = $con->real_escape_string($_SESSION['categoryID']);
+                $levelID = $_POST['txt_levelHID'];
+                $questionID = $_POST['txt_questionHID'];
+                $categoryID = $_SESSION['categoryID'];
 
                 archiveCategoryIfNotExist($categoryID, $con, $con2);
                 archiveLevels($categoryID, $con, $con2);
@@ -113,10 +113,11 @@ function displayFlashMessage() {
 <?php
 if (isset($_POST['btn_updateWord'])) {
     $questionID = $_POST['txt_editQuestionID'];
-    $word = $con->real_escape_string($_POST['txt_editWord']);
-    $sampleSentence = $con->real_escape_string($_POST['txt_editExample']);
-    $definition = $con->real_escape_string($_POST['txt_editDescription']);
-
+  
+    $word = mysqli_real_escape_string($con, $_POST['txt_editWord']);
+    $sampleSentence = mysqli_real_escape_string($con, $_POST['txt_editExample']);
+    $definition = mysqli_real_escape_string($con, $_POST['txt_editDescription']);
+  
     $sqlUpdate = "UPDATE questions SET word = '$word', sampleSentence = '$sampleSentence', definition = '$definition' WHERE questionID = '$questionID'";
 
     if ($con->query($sqlUpdate) === TRUE) {

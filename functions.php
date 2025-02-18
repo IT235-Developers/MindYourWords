@@ -1,3 +1,4 @@
+
 <?php 
 
 function archiveCategoryIfNotExist($categoryID, $con, $con2) {
@@ -10,8 +11,7 @@ function archiveCategoryIfNotExist($categoryID, $con, $con2) {
         $sqlGetCurrentCategory = "SELECT * FROM category WHERE categoryID = $categoryID";
         $res = $con->query($sqlGetCurrentCategory);
         $row = $res->fetch_assoc();
-
-        $categoryName = mysqli_real_escape_string($con2, $row['categoryName']);
+        $categoryName = mysqli_real_escape_string($con, $row['categoryName']);
         $sqlInsertCategoryToArchive = "INSERT INTO category(categoryID, categoryName) VALUES({$row['categoryID']}, '$categoryName')";
         
         // Might be needed later for error handling. For now, this is fine
@@ -34,7 +34,7 @@ function archiveLevel($levelID, $con, $con2) {
         $resCheckLevelInArchive = $con2->query($sqlCheckLevelInArchive);
 
         if ($resCheckLevelInArchive->num_rows == 0) {
-            $levelName = mysqli_real_escape_string($con2, $row['levelName']);
+            $levelName = mysqli_real_escape_string($con, $row['levelName']);
             $sqlInsertLevelToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '$levelName')";
             
             if ($con2->query($sqlInsertLevelToArchive) === TRUE) {
@@ -60,7 +60,8 @@ function archiveLevels($categoryID, $con, $con2) {
             $resCheckLevelInArchive = $con2->query($sqlCheckLevelInArchive);
 
             if ($resCheckLevelInArchive->num_rows == 0) {
-                $levelName = mysqli_real_escape_string($con2, $row['levelName']);
+                $levelName = mysqli_real_escape_string($con, $row['levelName']);
+
                 $sqlInsertLevelIDToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '$levelName')";
                 $con2->query($sqlInsertLevelIDToArchive);
             }
@@ -72,13 +73,15 @@ function archiveQuestion($questionID, $con, $con2) {
     $sqlGet = "SELECT * FROM questions WHERE questionID = $questionID";
     $resGet = $con->query($sqlGet);
 
+
     if ($resGet->num_rows > 0) {
         $row = $resGet->fetch_assoc();
-        $levelID = mysqli_real_escape_string($con2, $row['levelID']);
-        $word = mysqli_real_escape_string($con2, $row['word']);
-        $sampleSentence = mysqli_real_escape_string($con2, $row['sampleSentence']);
-        $definition = mysqli_real_escape_string($con2, $row['definition']);
-        $sqlInsert = "INSERT INTO questions (levelID, word, sampleSentence, definition) VALUES ('$levelID', '$word', '$sampleSentence', '$definition')";
+
+        $word = mysqli_real_escape_string($con, $row['word']);
+        $sampleSentence = mysqli_real_escape_string($con, $row['sampleSentence']);
+        $definition = mysqli_real_escape_string($con, $row['definition']);
+        $sqlInsert = "INSERT INTO questions (levelID, word, sampleSentence, definition) VALUES ({$row['levelID']}, '$word', '$sampleSentence', '$definition')";
+
         $con2->query($sqlInsert);
     } else {
         setFlashMessage('warning', 'Question not found for deletion.');
