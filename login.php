@@ -1,3 +1,12 @@
+<?php
+require_once 'auth/controller/AuthController.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $auth = new AuthController($pdo);
+    $auth->login($_POST['txt_email'], $_POST['txt_password']);
+}
+?>
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -15,12 +24,12 @@
 			<form action="" method="POST">
 				<div class="form-group">
 					<label for="txt_email"></label>
-					<input type="text" id="txt_email" placeholder="Email Address" class="form-control" required/>
+					<input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
 				</div>
 
 				<div class="form-group">
 					<label for="txt_password"></label>
-					<input type="Password" id="txt_password" placeholder="Password" class="form-control" required/>
+					<input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
 				</div>
 
 				<input type="submit" id="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
