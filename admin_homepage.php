@@ -74,6 +74,9 @@ if (isset($_POST['btn_addCategory'])) {
                 <!-- Display flash message when deleting category -->
                 <?php displayFlashMessage(); ?>
 
+                <!-- Display flash message when deleting category -->
+                <?php displayFlashMessage(); ?>
+
                 <!-- Flash Message -->
                 <?php if (isset($_SESSION['flash_message'])): ?>
                     <div class="alert alert-<?php echo $_SESSION['flash_message']['type']; ?> alert-dismissible fade show" role="alert">

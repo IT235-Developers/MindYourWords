@@ -1,4 +1,7 @@
-<?php function archiveCategoryIfNotExist($categoryID, $con, $con2) {
+
+<?php 
+
+function archiveCategoryIfNotExist($categoryID, $con, $con2) {
     $sqlCheckCategoryIfExist = "SELECT * FROM category WHERE categoryID = $categoryID";
     $resCheckCategory = $con2->query($sqlCheckCategoryIfExist);
 
@@ -58,6 +61,7 @@ function archiveLevels($categoryID, $con, $con2) {
 
             if ($resCheckLevelInArchive->num_rows == 0) {
                 $levelName = mysqli_real_escape_string($con, $row['levelName']);
+
                 $sqlInsertLevelIDToArchive = "INSERT INTO level(levelID, categoryID, levelName) VALUES({$row['levelID']}, {$row['categoryID']}, '$levelName')";
                 $con2->query($sqlInsertLevelIDToArchive);
             }
@@ -77,7 +81,7 @@ function archiveQuestion($questionID, $con, $con2) {
         $sampleSentence = mysqli_real_escape_string($con, $row['sampleSentence']);
         $definition = mysqli_real_escape_string($con, $row['definition']);
         $sqlInsert = "INSERT INTO questions (levelID, word, sampleSentence, definition) VALUES ({$row['levelID']}, '$word', '$sampleSentence', '$definition')";
-        
+
         $con2->query($sqlInsert);
     } else {
         setFlashMessage('warning', 'Question not found for deletion.');

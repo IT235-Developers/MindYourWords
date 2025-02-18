@@ -116,7 +116,7 @@ if (isset($_POST['btn_updateWord'])) {
     $word = mysqli_real_escape_string($con, $_POST['txt_editWord']);
     $sampleSentence = mysqli_real_escape_string($con, $_POST['txt_editExample']);
     $definition = mysqli_real_escape_string($con, $_POST['txt_editDescription']);
-
+  
     $sqlUpdate = "UPDATE questions SET word = '$word', sampleSentence = '$sampleSentence', definition = '$definition' WHERE questionID = '$questionID'";
 
     if ($con->query($sqlUpdate) === TRUE) {
