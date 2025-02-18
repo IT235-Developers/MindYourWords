@@ -39,12 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-group">
           <label for="txt_password"></label>
-          <input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
+          <div class="input-group">
+            <input type="password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
+            <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+              <i class="bi bi-eye"></i>
+            </span>
+          </div>
         </div>
 
         <div class="form-group">
           <label for="txt_cpassword"></label>
-          <input type="Password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" required/>
+          <div class="input-group">
+            <input type="password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" required/>
+            <span class="input-group-text" id="toggleCPassword" style="cursor: pointer;">
+              <i class="bi bi-eye"></i>
+            </span>
+          </div>
         </div>
 
         <div id="error-message" class="text-danger"></div>
