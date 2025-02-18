@@ -1,6 +1,7 @@
 <?php
 // AuthController.php
 require_once __DIR__ . '/../model/User.php';
+require_once __DIR__ . '/../../components/flash_message.php';
 session_start();
 
 class AuthController {
@@ -12,6 +13,7 @@ class AuthController {
 
     public function signup($username, $email, $password) {
         if ($this->userModel->register($username, $email, $password)) {
+            setFlashMessage("success", "Account registered successfully");
             header("Location: login.php");  // Redirect to login after successful signup
         } else {
             echo "Signup failed!";
