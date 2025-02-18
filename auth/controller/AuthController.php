@@ -26,7 +26,7 @@ class AuthController {
             $_SESSION['user'] = $user;
             header("Location: user_homepage.php");
         } else {
-            echo "Login failed!";
+            setFlashMessage("danger", "Invalid email or password. Please try again.");
         }
     }
 
