@@ -92,9 +92,9 @@ function displayFlashMessage() {
                     exit();
                 }
             } elseif (isset($_POST['btn_deleteQuestion'])) {
-                $levelID = $_POST['txt_levelHID'];
-                $questionID = $_POST['txt_questionHID'];
-                $categoryID = $_SESSION['categoryID'];
+                $levelID = $con->real_escape_string($_POST['txt_levelHID']);
+                $questionID = $con->real_escape_string($_POST['txt_questionHID']);
+                $categoryID = $con->real_escape_string($_SESSION['categoryID']);
 
                 archiveCategoryIfNotExist($categoryID, $con, $con2);
                 archiveLevels($categoryID, $con, $con2);
@@ -113,9 +113,9 @@ function displayFlashMessage() {
 <?php
 if (isset($_POST['btn_updateWord'])) {
     $questionID = $_POST['txt_editQuestionID'];
-    $word = $_POST['txt_editWord'];
-    $sampleSentence = $_POST['txt_editExample'];
-    $definition = $_POST['txt_editDescription'];
+    $word = $con->real_escape_string($_POST['txt_editWord']);
+    $sampleSentence = $con->real_escape_string($_POST['txt_editExample']);
+    $definition = $con->real_escape_string($_POST['txt_editDescription']);
 
     $sqlUpdate = "UPDATE questions SET word = '$word', sampleSentence = '$sampleSentence', definition = '$definition' WHERE questionID = '$questionID'";
 

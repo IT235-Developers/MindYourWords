@@ -24,9 +24,9 @@ function displayFlashMessage() {
 // Handle add question form submission
 if (isset($_POST['btn_addQuestion'])) {
     $levelID = $_POST['txt_levelHID'];
-    $word = $_POST['txt_addWord'];
-    $sampleSentence = $_POST['txt_addExample'];
-    $definition = $_POST['txt_addDescription'];
+    $word = $con->real_escape_string($_POST['txt_addWord']);
+    $sampleSentence = $con->real_escape_string($_POST['txt_addExample']);
+    $definition = $con->real_escape_string($_POST['txt_addDescription']);
 
     $sqlSelect = "SELECT * FROM questions WHERE levelID = $levelID AND word = '$word' AND sampleSentence = '$sampleSentence' AND definition = '$definition'";
     $resSelect = $con->query($sqlSelect);
