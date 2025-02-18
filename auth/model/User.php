@@ -10,21 +10,27 @@ class User {
     }
 
     public function register($username, $email, $password) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        return $stmt->execute([$username, $email, $hashedPassword]);
+        try {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            return $stmt->execute([$username, $email, $hashedPassword]);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public function login($email, $password) {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            return $user;  // Return user data on successful login
+            if ($user && password_verify($password, $user['password'])) {
+                return $user;  // Return user data on successful login
+            }
+        } catch (PDOException $e) {
+            return false;  // Login failed
         }
-
-        return false;  // Login failed
     }
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 require_once 'auth/controller/AuthController.php';
+require_once __DIR__ . '/components/flash_message.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth = new AuthController($pdo);
@@ -21,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <img class="secondary_logo" src="images\myw-secondary-logo.svg">
       <h3>Create an Account!</h3>
       <h6 class="mt-2">Enter your details to register.</h6>
+
+      <?php displayFlashMessage() ?>
 
       <form id="signupForm" action="sign_up.php" method="POST">
         <div class="form-group">

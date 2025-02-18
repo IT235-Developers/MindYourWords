@@ -16,7 +16,7 @@ class AuthController {
             setFlashMessage("success", "Account registered successfully");
             header("Location: login.php");  // Redirect to login after successful signup
         } else {
-            echo "Signup failed!";
+            setFlashMessage("danger", "Sign-up registration failed. Please ensure that the database tables and initial data are properly set up.");
         }
     }
 
