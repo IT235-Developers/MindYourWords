@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("conn2.php");
+include("functions.php");
 
 // Flash message functions
 function setFlashMessage($type, $message) {
@@ -22,9 +24,9 @@ function displayFlashMessage() {
 // Handle add question form submission
 if (isset($_POST['btn_addQuestion'])) {
     $levelID = $_POST['txt_levelHID'];
-    $word = $_POST['txt_addWord'];
-    $sampleSentence = $_POST['txt_addExample'];
-    $definition = $_POST['txt_addDescription'];
+    $word = $con->real_escape_string($_POST['txt_addWord']);
+    $sampleSentence = $con->real_escape_string($_POST['txt_addExample']);
+    $definition = $con->real_escape_string($_POST['txt_addDescription']);
 
     $sqlSelect = "SELECT * FROM questions WHERE levelID = $levelID AND word = '$word' AND sampleSentence = '$sampleSentence' AND definition = '$definition'";
     $resSelect = $con->query($sqlSelect);
@@ -42,6 +44,23 @@ if (isset($_POST['btn_addQuestion'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
+
+// Handle the deletion of level
+if (isset($_POST['btn_deleteLevel'])) {
+    $categoryID = $_SESSION['categoryID'];
+    $levelID = $_SESSION['levelID'];
+    $levelName = $_SESSION['levelName'];
+
+    archiveCategoryIfNotExist($categoryID, $con, $con2);
+    archiveLevel($levelID, $con, $con2);
+    archiveQuestionsByLevelId($levelID, $con, $con2);
+    deleteLevelFromMainDb($levelID, $con);
+
+    header("Location: admin_category.php");
+    exit();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,9 +78,10 @@ if (isset($_POST['btn_addQuestion'])) {
             <img src="images/myw-secondary-logo.svg" class="secondary_logo">
 
             <?php
-            if (isset($_POST['txt_levelHID']) && isset($_POST['txt_categoryHID'])) {
+            if (isset($_POST['txt_levelHID']) && isset($_POST['txt_categoryHID']) && isset($_POST['txt_levelName'])) {
                 $_SESSION['levelID'] = $_POST['txt_levelHID'];
                 $_SESSION['categoryID'] = $_POST['txt_categoryHID'];
+                $_SESSION['levelName'] = $_POST['txt_levelName'];
             }
 
             if (isset($_SESSION['levelID']) && isset($_SESSION['categoryID'])) {

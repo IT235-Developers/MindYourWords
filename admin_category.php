@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("conn2.php");
+include("functions.php");
 
 // Flash message function
 function setFlashMessage($type, $message) {
@@ -35,8 +37,8 @@ if (isset($_SESSION['categoryID'])) {
 
 // Add new level
 if (isset($_POST['btn_addLevel'])) {
-    $level = $_POST['txt_level'];
-    $categoryHID = $_POST['txt_categoryHID'];
+    $level = $con->real_escape_string($_POST['txt_level']);
+    $categoryHID = $con->real_escape_string($_POST['txt_categoryHID']);
 
     $sqlSelectLevels = "SELECT * FROM level WHERE categoryID = '$categoryHID' AND levelName = '$level'";
     $resSelectLevels = $con->query($sqlSelectLevels);
@@ -54,6 +56,20 @@ if (isset($_POST['btn_addLevel'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
+
+if (isset(($_POST['btn_deleteCategory']))) {
+    $categoryID = $_SESSION['categoryID'];
+    $levelName = $_SESSION['levelName'];
+
+    archiveCategoryIfNotExist($categoryID, $con, $con2);
+    archiveLevels($categoryID, $con, $con2);
+    archiveAllQuestions($categoryID, $con, $con2);
+    deleteCategoryFromMainDb($categoryID, $con);
+
+    header("Location: admin_homepage.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,6 +122,7 @@ if (isset($_POST['btn_addLevel'])) {
                             <form action="admin_level.php" method="POST">
                                 <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
                                 <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
+                                <input type="hidden" name="txt_levelName" value="<?= $row['levelName'] ?>">
                                 <button type="submit" class="category_level_container rounded text-center bg-white">
                                     <p><?= $row['levelName'] ?></p>
                                 </button>
