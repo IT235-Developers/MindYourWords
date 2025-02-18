@@ -165,22 +165,6 @@ if (isset($_POST['btn_deleteLevel'])) {
     </div>
     <div id="overlay" style="display: none;"></div>
 
-    <script>
-        function showForm(levelID) {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            var levelInput = document.getElementById("txt_levelHID");
-            levelInput.value = levelID;
-            form.style.display = "block";
-            overlay.style.display = "block";
-        }
-
-        function hideForm() {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            form.style.display = "none";
-            overlay.style.display = "none";
-        }
-    </script>
+    <script src="js/shared-script.js"></script>
 </body>
 </html>

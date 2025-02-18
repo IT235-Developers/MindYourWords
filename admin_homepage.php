@@ -108,20 +108,6 @@ if (isset($_POST['btn_addCategory'])) {
             </div>
         </div>
 
-        <script>
-            function showForm() {
-                var form = document.getElementById("myForm");
-                var overlay = document.getElementById("overlay");
-                form.style.display = "block";
-                overlay.style.display = "block"; // Show the overlay
-            }
-
-            function hideForm() {
-                var form = document.getElementById("myForm");
-                var overlay = document.getElementById("overlay");
-                form.style.display = "none";
-                overlay.style.display = "none"; // Hide the overlay
-            }
-        </script>
+        <script src="js/shared-script.js"></script>
     </body>
 </html>

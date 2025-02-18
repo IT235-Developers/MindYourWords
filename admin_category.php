@@ -141,20 +141,7 @@ if (isset(($_POST['btn_deleteCategory']))) {
             <a class="btn back float-end mt-3 me-2" href="admin_homepage.php">Back</a>
         </form>
     </div>
-    <script>
-        function showForm() {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            form.style.display = "block";
-            overlay.style.display = "block";
-        }
-
-        function hideForm() {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            form.style.display = "none";
-            overlay.style.display = "none";
-        }
-    </script>
+    
+    <script src="js/shared-script.js"></script>
 </body>
 </html>
