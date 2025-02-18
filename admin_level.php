@@ -160,8 +160,8 @@ if (isset($_POST['btn_deleteLevel'])) {
             <input type="text" name="txt_addExample" style="width: 100%" placeholder="Enter Example" class="mb-2" required>
             <input type="text" name="txt_addDescription" style="width: 100%" placeholder="Enter Definition" class="mb-2" required>
             <input type="hidden" id="txt_levelHID" name="txt_levelHID">
-            <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
             <button type="submit" class="btn btn_add update float-end" name="btn_addQuestion">Add Question</button>
+            <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
         </form>
     </div>
     <div id="overlay" style="display: none;"></div>
