@@ -54,7 +54,7 @@ if (isset($_POST['btn_addCategory'])) {
     </head>
     <body>
 
-        <div id="overlay" onclick="hideForm()"></div>
+        <div id="overlay"></div>
         <div class="container-fluid main_container">
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
@@ -65,10 +65,11 @@ if (isset($_POST['btn_addCategory'])) {
                     <h5 class="mb-2">Add New Category</h5>
                     <form action="" method="POST" class="myForm">
                         <input type="text" name="txt_category" placeholder="Category Name" class="inputFieldAdd" required>
+                        <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
                         <button type="submit" class="btn btn_add update float-end" name="btn_addCategory">Update</button>
                     </form>
                 </div>
-                <button onclick="showForm()" class="btn_add"> + Add Category</button>
+                <button id="btn_add" class="btn_add"> + Add Category</button>
 
                 <!-- Display flash message when deleting category -->
                 <?php displayFlashMessage(); ?>

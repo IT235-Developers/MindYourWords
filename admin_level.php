@@ -104,7 +104,7 @@ if (isset($_POST['btn_deleteLevel'])) {
                 echo "<h3 class='category_header'>" . $row['categoryName'] . " - " . $row['levelName'] . "</h3>";
             }
             ?>
-            <button onclick="showForm('<?= $levelID; ?>')" class="btn_add">+ Add Question</button>
+            <button data-levelid="<?= $levelID; ?>" class="btn_add" id="btn_add">+ Add Question</button>
 
             <!-- Display Flash Messages -->
             <?php displayFlashMessage(); ?>
@@ -159,10 +159,11 @@ if (isset($_POST['btn_deleteLevel'])) {
             <input type="text" name="txt_addExample" style="width: 100%" placeholder="Enter Example" class="mb-2" required>
             <input type="text" name="txt_addDescription" style="width: 100%" placeholder="Enter Definition" class="mb-2" required>
             <input type="hidden" id="txt_levelHID" name="txt_levelHID">
+            <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
             <button type="submit" class="btn btn_add update float-end" name="btn_addQuestion">Add Question</button>
         </form>
     </div>
-    <div id="overlay" onclick="hideForm()" style="display: none;"></div>
+    <div id="overlay" style="display: none;"></div>
 
     <script>
         function showForm(levelID) {
