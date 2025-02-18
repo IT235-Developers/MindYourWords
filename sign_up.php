@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h3>Create an Account!</h3>
       <h6 class="mt-2">Enter your details to register.</h6>
 
-      <form action="sign_up.php" method="POST">
+      <form id="signupForm" action="sign_up.php" method="POST">
         <div class="form-group">
           <label for="txt_username"></label>
           <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" required/>
@@ -43,10 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="Password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" required/>
         </div>
 
+        <div id="error-message" class="text-danger"></div>
+
         <input type="submit" id="btn_signUp" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
 
         <p class="mt-3">Already have an account? <a href="login.php">Login here</a></p>
       </form>
     </div>
+
+    <script src="auth/validation/script.js"></script>
   </body>
 </html>
