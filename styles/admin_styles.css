@@ -93,6 +93,14 @@ th{
 	background-color: #218838;
 	color: #fff;
 }
+.cancel{
+	background-color:  #919191;
+	color: #FFF;
+}
+.cancel:hover{
+	background-color:  #6a6a6a;
+	color: #FFF;
+}
 .back{
 	background-color: #007BFF;
 	color: #fff;
