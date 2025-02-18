@@ -44,5 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				</div>
 			</form>
 		</div>
+
+		<script src="auth/validation/login_script.js"></script>
 	</body>
 </html>
