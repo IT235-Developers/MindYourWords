@@ -153,6 +153,8 @@
                 window.speechSynthesis.speak(speech);
             }
 
+            btn_cancel.addEventListener("click", cancelOngoingSpeech);
+
             // Event listeners for the word and sentence buttons
             document.getElementById("wordButton").addEventListener("click", function () {
                 let word = this.getAttribute("data-text");
