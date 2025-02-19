@@ -79,7 +79,7 @@
             </div>
 
             <form method="POST">
-                <a class="btn delete mt-3 float-start" href="user_category.php">Cancel</a>
+                <a class="btn delete mt-3 float-start" href="user_category.php" id="btn_cancel">Cancel</a>
             </form>
         </div>
 
@@ -90,6 +90,11 @@
             let score = 0; // Initialize score
 
             const submitButton = document.getElementById("submitButton");
+            const btn_cancel = document.getElementById("btn_cancel");
+
+            function cancelOngoingSpeech(){
+                window.speechSynthesis.cancel();
+            }
 
             // Load voices and set the selectedVoice
             function initializeVoices() {
@@ -127,7 +132,7 @@
                     textToSpeech(questions[index].word); // Read the word
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
-                        }, 2000);
+                        }, 1000);
 
                 } else {
                     document.getElementById("question-container").innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
@@ -147,6 +152,8 @@
                 }
                 window.speechSynthesis.speak(speech);
             }
+
+            btn_cancel.addEventListener("click", cancelOngoingSpeech);
 
             // Event listeners for the word and sentence buttons
             document.getElementById("wordButton").addEventListener("click", function () {
@@ -168,6 +175,7 @@
                 userInputField.classList.remove("correct", "incorrect");
 
                 if (userInput === correctWord) {
+                    cancelOngoingSpeech();
                     let points = 3 - attempts; // Calculate points based on attempts
                     score += points; // Update score
                     document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
@@ -191,6 +199,7 @@
                     if (attempts < 3) {
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
                     } else {
+                        cancelOngoingSpeech();
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
