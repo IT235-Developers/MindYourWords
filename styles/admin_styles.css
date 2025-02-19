@@ -151,7 +151,7 @@ th{
 }
 
 .input-group-text{
-	background-color: white;
+	background-color: rgb(241, 241, 241);
 }
 
 @media only screen and (max-width: 992px) {
