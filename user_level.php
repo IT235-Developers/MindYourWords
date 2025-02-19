@@ -131,7 +131,6 @@
 
                 } else {
                     document.getElementById("question-container").innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
-                    document.getElementById("submitButton").style.display = "none";
                 }
             }
 
