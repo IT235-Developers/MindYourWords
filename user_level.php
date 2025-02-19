@@ -79,7 +79,7 @@
             </div>
 
             <form method="POST">
-                <a class="btn delete mt-3 float-start" href="user_category.php">Cancel</a>
+                <a class="btn delete mt-3 float-start" href="user_category.php" id="btn_cancel">Cancel</a>
             </form>
         </div>
 
