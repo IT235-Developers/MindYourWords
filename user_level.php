@@ -221,6 +221,13 @@
                         userInputField.classList.remove("incorrect");
                     }, 500);
                 }
+            userInput.addEventListener("keydown", function(event) {
+                // Check if the pressed key is Enter
+                if (event.key === "Enter") {
+                    if(!submitButton.disabled){
+                        submitAnswer();
+                    }
+                }
             });
 
             // Initialize the voices and load the first question
