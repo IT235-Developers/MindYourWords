@@ -175,6 +175,7 @@
                 userInputField.classList.remove("correct", "incorrect");
 
                 if (userInput === correctWord) {
+                    cancelOngoingSpeech();
                     let points = 3 - attempts; // Calculate points based on attempts
                     score += points; // Update score
                     document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
@@ -198,6 +199,7 @@
                     if (attempts < 3) {
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
                     } else {
+                        cancelOngoingSpeech();
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
