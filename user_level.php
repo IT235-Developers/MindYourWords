@@ -132,7 +132,7 @@
                     textToSpeech(questions[index].word); // Read the word
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
-                        }, 2000);
+                        }, 1000);
 
                 } else {
                     document.getElementById("question-container").innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
