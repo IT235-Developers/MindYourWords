@@ -34,7 +34,6 @@
             <img src="images/myw-secondary-logo.svg" class="secondary_logo">
 
             <?php
-            session_start();
             include("connection.php");
             $sqlCategoryName = "SELECT * FROM category WHERE categoryID = $categoryHID";
             $resCategoryName = $con->query($sqlCategoryName);
