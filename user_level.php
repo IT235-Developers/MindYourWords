@@ -89,6 +89,8 @@
             let attempts = 0;
             let score = 0; // Initialize score
 
+            const submitButton = document.getElementById("submitButton");
+
             // Load voices and set the selectedVoice
             function initializeVoices() {
                 return new Promise((resolve) => {
@@ -129,7 +131,6 @@
 
                 } else {
                     document.getElementById("question-container").innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
-                    document.getElementById("submitButton").style.display = "none";
                 }
             }
 
@@ -159,7 +160,7 @@
             });
 
             // Event listener for the "Submit" button
-            document.getElementById("submitButton").addEventListener("click", () => {
+            submitButton.addEventListener("click", () => {
                 const userInputField = document.getElementById("userInput");
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
@@ -172,12 +173,18 @@
                     document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
+                    // Disable the submit button whenever you get the correct answer
+                    submitButton.disabled = true;
+
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
 
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
                         userInputField.classList.remove("correct");
+
+                        //re-enable submit button after successful arrival at the next question
+                        submitButton.disabled = false;
                     }, 1500);
                 } else {
                     attempts++;
@@ -188,8 +195,14 @@
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
 
+                        // Disable the submit button whenever you get the wrong answer
+                        submitButton.disabled = true;
+
                         setTimeout(() => {
                             loadQuestion(currentQuestionIndex);
+
+                            //re-enable submit button after successful arrival at the next question
+                            submitButton.disabled = false;
                         }, 5000);
                     }
                     userInputField.classList.add("incorrect");
