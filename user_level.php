@@ -182,6 +182,9 @@
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
                         userInputField.classList.remove("correct");
+
+                        //re-enable submit button after successful arrival at the next question
+                        submitButton.disabled = false;
                     }, 1500);
                 } else {
                     attempts++;
@@ -197,6 +200,9 @@
 
                         setTimeout(() => {
                             loadQuestion(currentQuestionIndex);
+
+                            //re-enable submit button after successful arrival at the next question
+                            submitButton.disabled = false;
                         }, 5000);
                     }
                     userInputField.classList.add("incorrect");
