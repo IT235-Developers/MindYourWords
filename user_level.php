@@ -89,6 +89,8 @@
             let attempts = 0;
             let score = 0; // Initialize score
 
+            const userInputField = document.getElementById("userInput");
+
             const submitButton = document.getElementById("submitButton");
             const btn_cancel = document.getElementById("btn_cancel");
 
