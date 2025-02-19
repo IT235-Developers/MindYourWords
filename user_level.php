@@ -173,6 +173,9 @@
                     document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
+                    // Disable the submit button whenever you get the correct answer
+                    submitButton.disabled = true;
+
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
 
@@ -188,6 +191,9 @@
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
+
+                        // Disable the submit button whenever you get the wrong answer
+                        submitButton.disabled = true;
 
                         setTimeout(() => {
                             loadQuestion(currentQuestionIndex);
