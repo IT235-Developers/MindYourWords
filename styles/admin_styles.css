@@ -145,8 +145,13 @@ th{
 .inputFieldAdd{
 	width: 100%;
 }
-.form-control{
+
+.form-group{
 	margin-bottom: 10px;
+}
+
+.input-group-text{
+	background-color: rgb(241, 241, 241);
 }
 
 @media only screen and (max-width: 992px) {
