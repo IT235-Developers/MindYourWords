@@ -90,6 +90,7 @@
             let score = 0; // Initialize score
 
             const submitButton = document.getElementById("submitButton");
+            const btn_cancel = document.getElementById("btn_cancel");
 
             // Load voices and set the selectedVoice
             function initializeVoices() {
