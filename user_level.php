@@ -92,6 +92,10 @@
             const submitButton = document.getElementById("submitButton");
             const btn_cancel = document.getElementById("btn_cancel");
 
+            function cancelOngoingSpeech(){
+                window.speechSynthesis.cancel();
+            }
+
             // Load voices and set the selectedVoice
             function initializeVoices() {
                 return new Promise((resolve) => {
