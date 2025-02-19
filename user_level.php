@@ -89,6 +89,8 @@
             let attempts = 0;
             let score = 0; // Initialize score
 
+            const submitButton = document.getElementById("submitButton");
+
             // Load voices and set the selectedVoice
             function initializeVoices() {
                 return new Promise((resolve) => {
