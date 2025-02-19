@@ -160,7 +160,7 @@
             });
 
             // Event listener for the "Submit" button
-            document.getElementById("submitButton").addEventListener("click", () => {
+            submitButton.addEventListener("click", () => {
                 const userInputField = document.getElementById("userInput");
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
