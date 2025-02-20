@@ -89,6 +89,8 @@
             let attempts = 0;
             let score = 0; // Initialize score
 
+            const userInputField = document.getElementById("userInput");
+
             const submitButton = document.getElementById("submitButton");
             const btn_cancel = document.getElementById("btn_cancel");
 
@@ -153,22 +155,8 @@
                 window.speechSynthesis.speak(speech);
             }
 
-            btn_cancel.addEventListener("click", cancelOngoingSpeech);
-
-            // Event listeners for the word and sentence buttons
-            document.getElementById("wordButton").addEventListener("click", function () {
-                let word = this.getAttribute("data-text");
-                textToSpeech(word);
-            });
-
-            document.getElementById("sentenceButton").addEventListener("click", function () {
-                let sentence = this.getAttribute("data-text");
-                textToSpeech(sentence);
-            });
-
-            // Event listener for the "Submit" button
-            submitButton.addEventListener("click", () => {
-                const userInputField = document.getElementById("userInput");
+            //Function to submit answer
+            function submitAnswer(){
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
 
@@ -219,7 +207,32 @@
                         userInputField.classList.remove("incorrect");
                     }, 500);
                 }
+            }
+
+            btn_cancel.addEventListener("click", cancelOngoingSpeech);
+
+            userInput.addEventListener("keydown", function(event) {
+                // Check if the pressed key is Enter
+                if (event.key === "Enter") {
+                    if(!submitButton.disabled){
+                        submitAnswer();
+                    }
+                }
             });
+
+            // Event listeners for the word and sentence buttons
+            document.getElementById("wordButton").addEventListener("click", function () {
+                let word = this.getAttribute("data-text");
+                textToSpeech(word);
+            });
+
+            document.getElementById("sentenceButton").addEventListener("click", function () {
+                let sentence = this.getAttribute("data-text");
+                textToSpeech(sentence);
+            });
+
+            // Event listener for the "Submit" button
+            submitButton.addEventListener("click", submitAnswer);
 
             // Initialize the voices and load the first question
             initializeVoices().then(() => {
