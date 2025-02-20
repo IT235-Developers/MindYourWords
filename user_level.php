@@ -55,14 +55,21 @@
                     }
                 }
 
+                echo "<script>
+                        const questions = " . json_encode($questions) . ";
                         let questionsArray = (typeof questions === 'string') ? JSON.parse(questions) : questions;
+
+                        shuffleArray(questionsArray);
+
                         questionsArray = JSON.stringify(questionsArray);
+
                         function shuffleArray(array) {
                             for (let i = array.length - 1; i > 0; i--) {
                                 const j = Math.floor(Math.random() * (i + 1));
                                 [array[i], array[j]] = [array[j], array[i]];
                             }
                         }
+                    </script>";
                 ?>
             </div>
 
