@@ -254,7 +254,7 @@
                 .catch((error) => {
                     //This is subject to change in the future
                     console.error("Error initializing voices:", error);
-                });;
+                });
         </script>
     </body>
 </html>
