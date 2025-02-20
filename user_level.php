@@ -55,7 +55,7 @@
                     }
                 }
 
-                echo "<script>const questions = " . json_encode($questions) . ";</script>";
+                        let questionsArray = (typeof questions === 'string') ? JSON.parse(questions) : questions;
                 ?>
             </div>
 
