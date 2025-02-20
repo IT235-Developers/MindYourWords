@@ -146,8 +146,8 @@
                 let speech = new SpeechSynthesisUtterance();
                 speech.text = text;
                 speech.volume = 1;
-                speech.rate = 0.8;
-                speech.pitch = 1;
+                speech.rate = 0.87;
+                speech.pitch = 0.85;
                 speech.lang = "en-US";
                 if (selectedVoice) {
                     speech.voice = selectedVoice;
