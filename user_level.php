@@ -57,11 +57,8 @@
 
                 echo "<script>
                         const questions = " . json_encode($questions) . ";
-                        let questionsArray = (typeof questions === 'string') ? JSON.parse(questions) : questions;
-
-                        shuffleArray(questionsArray);
-
-                        questionsArray = JSON.stringify(questionsArray);
+                    
+                        shuffleArray(questions);
 
                         function shuffleArray(array) {
                             for (let i = array.length - 1; i > 0; i--) {
