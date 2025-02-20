@@ -41,6 +41,11 @@
                     echo "<h3 class='category_header'>" . $row['categoryName'] . " - " . $row['levelName'] . "</h3>";
                 }
 
+                else{
+                    //This is subject to change in the future
+                    echo "Failed to fetch category name and level name";
+                }
+
                 $getQuestions = "SELECT * FROM questions WHERE levelID = $levelID";
                 $resQuestions = $con->query($getQuestions);
 
