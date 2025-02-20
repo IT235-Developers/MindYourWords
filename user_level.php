@@ -56,6 +56,7 @@
                 }
 
                         let questionsArray = (typeof questions === 'string') ? JSON.parse(questions) : questions;
+                        questionsArray = JSON.stringify(questionsArray);
                 ?>
             </div>
 
