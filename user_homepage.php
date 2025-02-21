@@ -1,6 +1,20 @@
 <?php
 session_start();
 include("connection.php");
+
+function isLevelsAvailable($con, $row) {
+    $categoryID = $row['categoryID'];
+    $sqlCheckLevels = "SELECT COUNT(*) as levelCount FROM level WHERE categoryID = '$categoryID'";
+    $resCheckLevels = $con->query($sqlCheckLevels);
+    $levelData = $resCheckLevels->fetch_assoc();
+
+    if ($levelData['levelCount'] > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +46,8 @@ include("connection.php");
 
                         if ($resDisplayCategories->num_rows > 0) {
                             while ($row = $resDisplayCategories->fetch_assoc()) {
-                                echo "
+                                if (isLevelsAvailable($con,$row)) {
+                                    echo "
                                     <div class='col-12 col-lg-6 g-3'>
                                         <form action='user_category.php' method='POST'>
                                             <input type='text' name='txt_categoryHID' value='" . $row['categoryID'] . "' hidden>
@@ -42,6 +57,7 @@ include("connection.php");
                                         </form>
                                     </div>
                                 ";
+                                }
                             }
                         }
                     ?>
