@@ -1,11 +1,6 @@
 <?php
-require_once 'auth/controller/AuthController.php';
+session_start();
 require_once __DIR__ . '/components/flash_message.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $auth = new AuthController($pdo);
-    $auth->signup($_POST['txt_username'], $_POST['txt_email'], $_POST['txt_password']);
-}
 ?>
 
 <html lang="en">
@@ -26,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <?php displayFlashMessage() ?>
 
-      <form id="signupForm" action="sign_up.php" method="POST">
+      <form id="signupForm" action="auth/sign_up.php" method="POST">
         <div class="form-group">
           <label for="txt_username"></label>
           <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" required/>
@@ -59,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="error-message" class="text-danger"></div>
 
-        <input type="submit" id="btn_signUp" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
-
+        <input type="submit" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
+        
         <p class="mt-3">Already have an account? <a href="login.php">Login here</a></p>
       </form>
     </div>

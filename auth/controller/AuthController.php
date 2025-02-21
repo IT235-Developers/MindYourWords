@@ -14,9 +14,10 @@ class AuthController {
     public function signup($username, $email, $password) {
         if ($this->userModel->register($username, $email, $password)) {
             setFlashMessage("success", "Account registered successfully");
-            header("Location: login.php");  // Redirect to login after successful signup
+            header("Location: ../login.php");  // Redirect to login after successful signup
         } else {
-            setFlashMessage("danger", "Sign-up registration failed. Please ensure that the database tables and initial data are properly set up.");
+            setFlashMessage("danger", "Sign-up registration failed. Please try again.");
+            header("Location: ../sign_up.php");
         }
     }
 
