@@ -105,6 +105,10 @@
             const definition = document.getElementById("definition");
             const question_container = document.getElementById("question-container");
 
+            const correctSound = new Audio("resources/audios/correct_audio.mp3");
+            const wrongSound = new Audio("resources/audios/wrong_audio.mp3");
+            const questionCompletedSound = new Audio("resources/audios/question_completed.wav");
+
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
             }
@@ -155,6 +159,7 @@
                         }, 1000);
 
                 } else {
+                    questionCompletedSound.play();
                     question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
                 }
             }
@@ -188,8 +193,14 @@
 
                 userInputField.classList.remove("correct", "incorrect");
 
+                //reset back the wrongSound
+                wrongSound.pause();
+                wrongSound.currentTime = 0;
+
                 if (userInput === correctWord) {
+                    correctSound.play();
                     cancelOngoingSpeech();
+
                     let points = 3 - attempts; // Calculate points based on attempts
                     score += points; // Update score
                     feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
@@ -209,6 +220,7 @@
                         submitButton.disabled = false;
                     }, 1500);
                 } else {
+                    wrongSound.play();
                     attempts++;
                     if (attempts < 3) {
                         feedback.innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
