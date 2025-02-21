@@ -14,7 +14,7 @@ require_once __DIR__ . '/components/flash_message.php';
       <title>Sign Up Page</title>
   </head>
   <body>
-    <div class="container-fluid main_container">
+    <div class="container-fluid main_container d-flex flex-column">
       <img class="secondary_logo" src="images\myw-secondary-logo.svg">
       <h3>Create an Account!</h3>
       <h6 class="mt-2">Enter your details to register.</h6>
@@ -56,7 +56,7 @@ require_once __DIR__ . '/components/flash_message.php';
 
         <input type="submit" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
         
-        <p class="mt-3">Already have an account? <a href="login.php">Login here</a></p>
+        <p class="mt-3 text-center">Already have an account? <a href="login.php">Login here</a></p>
       </form>
     </div>
 

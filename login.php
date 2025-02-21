@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<title>Log in Page</title>
 	</head>
 	<body>
-		<div class="container-fluid main_container">
+		<div class="container-fluid main_container d-flex flex-column justify-content-center">
 			<img class="secondary_logo" src="images\myw-secondary-logo.svg">
 			<h3>Welcome, English Learner!</h3>
 			<h6 class="mt-2">Sign in to your account.</h6>
@@ -45,7 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<input type="submit" id="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
 
 				<div class="form-group">
-					<p class="mt-3">Don't have an account? <a href="sign_up.php">Register Here</p>
+					<p class="mt-3 text-center">Don't have an account? <a href="sign_up.php">Register Here</a></p>
+				</div>
+
+				<div class="d-flex flex-column justify-content-center" style="margin-top: 32px;">
+					<p class="text-center text-secondary mb-1"><a href="terms_and_conditions.php">Terms and Conditions</a></p>
+					<p class="text-center text-secondary mb-1"><a href="all_about_us.php">All About Us</a></p>
 				</div>
 			</form>
 		</div>

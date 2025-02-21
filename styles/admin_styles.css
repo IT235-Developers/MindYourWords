@@ -19,7 +19,7 @@ body{
 	border-radius: 10px;
 	box-shadow: 0 0 7px rgb(0 0 0 / 0.2);
 	align-items: center;
-	padding: 25px 50px 50px 50px;
+	padding: 25px 50px 25px 50px;
 	max-height: 80%;
 	justify-content: center;
 	/*display: flex;
@@ -29,7 +29,7 @@ body{
 /*admin_homepage, admin_category*/
 .main_container{
 	width: 50%;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 }
 /*admin_level*/
 .secondary_container{
