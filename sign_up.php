@@ -21,7 +21,7 @@ require_once __DIR__ . '/components/flash_message.php';
 
       <?php displayFlashMessage() ?>
 
-      <form id="signupForm" action="auth/signup.php" method="POST">
+      <form id="signupForm" action="auth/sign_up.php" method="POST">
         <div class="form-group">
           <label for="txt_username"></label>
           <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" required/>
