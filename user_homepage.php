@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("connection.php");
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,17 +17,16 @@
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <h3 class="welcome_header">
-                    <?php
-                        session_start();
-                        echo "Welcome, " . $_SESSION['user']['username'] . "!";
+                    <?php 
+                    $username = $_SESSION['user']['username'];
+                    
+                    echo "Welcome, {$username}!"; 
                     ?>
                 </h3>
 
                 <!-- Display Categories -->
                 <div class="row">
                     <?php
-                        include("connection.php");
-
                         $sqlDisplayCategories = "SELECT * FROM category";
                         $resDisplayCategories = $con->query($sqlDisplayCategories);
 
