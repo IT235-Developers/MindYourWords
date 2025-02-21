@@ -63,6 +63,9 @@ function isLevelsAvailable($con, $row) {
                     ?>
                 </div>
             </div>
+            <form action="auth/logout.php" method="POST">
+                <button type="submit" class="btn delete mt-3 float-end">Logout</button>
+            </form>
         </div>
     </body>
 </html>

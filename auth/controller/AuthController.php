@@ -1,8 +1,8 @@
 <?php
 // AuthController.php
+session_start();
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../../components/flash_message.php';
-session_start();
 
 class AuthController {
     private $userModel;
@@ -14,9 +14,10 @@ class AuthController {
     public function signup($username, $email, $password) {
         if ($this->userModel->register($username, $email, $password)) {
             setFlashMessage("success", "Account registered successfully");
-            header("Location: login.php");  // Redirect to login after successful signup
+            header("Location: ../login.php");  // Redirect to login after successful signup
         } else {
-            setFlashMessage("danger", "Sign-up registration failed. Please ensure that the database tables and initial data are properly set up.");
+            setFlashMessage("danger", "Sign-up registration failed. Please try again.");
+            header("Location: ../sign_up.php");
         }
     }
 
@@ -38,8 +39,9 @@ class AuthController {
     }
 
     public function logout() {
-        session_destroy();
-        header("Location: login.php");
+        unset($_SESSION['user']);
+        setFlashMessage("success", "You have been logged out successfully.");
+        header("Location: ../login.php");
     }
 }
 ?>
