@@ -16,6 +16,19 @@
         exit();
     }
 
+    function isQuestionsAvailable($con,$row ) {
+        $levelID = $row['levelID'];
+        $sqlCheckQuestions = "SELECT COUNT(*) as questionCount FROM questions WHERE levelID = '$levelID'";
+        $resCheckQuestions = $con->query($sqlCheckQuestions);
+        $questionData = $resCheckQuestions->fetch_assoc();
+
+        if ($questionData['questionCount'] > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -51,17 +64,19 @@
 
                 if ($resDisplayLevel->num_rows > 0) {
                     while ($row = $resDisplayLevel->fetch_assoc()) {
+                        if (isQuestionsAvailable($con, $row)) {
                 ?>
-                        <div class="col-12 col-md-6 g-3">
-                            <form action="user_level.php" method="POST">
-                                <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
-                                <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
-                                <button type="submit" class="category_level_container rounded text-center bg-white">
-                                    <p><?= $row['levelName'] ?></p>
-                                </button>
-                            </form>
-                        </div>
+                            <div class="col-12 col-md-6 g-3">
+                                <form action="user_level.php" method="POST">
+                                    <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
+                                    <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
+                                    <button type="submit" class="category_level_container rounded text-center bg-white">
+                                        <p><?= $row['levelName'] ?></p>
+                                    </button>
+                                </form>
+                            </div>
                 <?php
+                        }
                     }
                 }
                 ?>
