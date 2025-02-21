@@ -166,7 +166,9 @@
                 userInputField.classList.remove("correct", "incorrect");
 
                 if (userInput === correctWord) {
+                    correctSound.play();
                     cancelOngoingSpeech();
+
                     let points = 3 - attempts; // Calculate points based on attempts
                     score += points; // Update score
                     document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
@@ -186,6 +188,7 @@
                         submitButton.disabled = false;
                     }, 1500);
                 } else {
+                    wrongSound.play();
                     attempts++;
                     if (attempts < 3) {
                         document.getElementById("feedback").innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
