@@ -2,7 +2,6 @@
 // AuthController.php
 require_once __DIR__ . '/../model/User.php';
 require_once __DIR__ . '/../../components/flash_message.php';
-session_start();
 
 class AuthController {
     private $userModel;
@@ -31,8 +30,8 @@ class AuthController {
     }
 
     public function logout() {
-        session_destroy();
-        session_unset();
+        unset($_SESSION['user']);
+        setFlashMessage("success", "You have been logged out successfully.");
         header("Location: ../login.php");
     }
 }
