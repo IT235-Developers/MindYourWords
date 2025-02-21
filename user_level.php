@@ -94,6 +94,9 @@
             const submitButton = document.getElementById("submitButton");
             const btn_cancel = document.getElementById("btn_cancel");
 
+            const correctSound = new Audio("resources/audios/correct_audio.mp3");
+            const wrongSound = new Audio("resources/audios/wrong_audio.mp3");
+
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
             }
