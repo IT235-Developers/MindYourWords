@@ -60,7 +60,7 @@
                     }
                 }
 
-                echo "<script>const questions = " . json_encode($questions) . ";</script>";
+                echo "<script> const questions = " . json_encode($questions) . "; </script>";
                 ?>
             </div>
 
@@ -173,6 +173,14 @@
                 window.speechSynthesis.speak(speech);
             }
 
+            //Randomize questions
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
             //Function to submit answer
             function submitAnswer(){
                 const userInput = userInputField.value.trim().toLowerCase();
@@ -255,6 +263,7 @@
             // Initialize the voices and load the first question
             initializeVoices()
                 .then(() => {
+                    shuffleArray(questions);
                     loadQuestion(currentQuestionIndex);
                 })
                 .catch((error) => {
