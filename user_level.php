@@ -95,9 +95,15 @@
             let score = 0; // Initialize score
 
             const userInputField = document.getElementById("userInput");
-
-            const submitButton = document.getElementById("submitButton");
+            
             const btn_cancel = document.getElementById("btn_cancel");
+            const submitButton = document.getElementById("submitButton");
+            const sentenceButton = document.getElementById("sentenceButton");
+            const wordButton = document.getElementById("wordButton");
+            
+            const feedback = document.getElementById("feedback");
+            const definition = document.getElementById("definition");
+            const question_container = document.getElementById("question-container");
 
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
@@ -136,20 +142,20 @@
             // Function to load the current question
             function loadQuestion(index) {
                 if (index < questions.length) {
-                    document.getElementById("definition").innerHTML = `
+                    definition.innerHTML = `
                     <h6 style="display: inline;">Definition:</h6>
                     <span>${questions[index].definition}</span>`;
-                    document.getElementById("wordButton").setAttribute("data-text", questions[index].word);
-                    document.getElementById("sentenceButton").setAttribute("data-text", questions[index].sampleSentence);
-                    document.getElementById("userInput").value = ""; // Clear input field
-                    document.getElementById("feedback").innerText = ""; // Clear feedback
+                    wordButton.setAttribute("data-text", questions[index].word);
+                    sentenceButton.setAttribute("data-text", questions[index].sampleSentence);
+                    userInputField.value = ""; // Clear input field
+                    feedback.innerText = ""; // Clear feedback
                     textToSpeech(questions[index].word); // Read the word
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
                         }, 1000);
 
                 } else {
-                    document.getElementById("question-container").innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
+                    question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
                 }
             }
 
@@ -178,7 +184,7 @@
                     cancelOngoingSpeech();
                     let points = 3 - attempts; // Calculate points based on attempts
                     score += points; // Update score
-                    document.getElementById("feedback").innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
+                    feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
                     // Disable the submit button whenever you get the correct answer
@@ -197,10 +203,10 @@
                 } else {
                     attempts++;
                     if (attempts < 3) {
-                        document.getElementById("feedback").innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
+                        feedback.innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
                     } else {
                         cancelOngoingSpeech();
-                        document.getElementById("feedback").innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
+                        feedback.innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
 
@@ -233,12 +239,12 @@
             });
 
             // Event listeners for the word and sentence buttons
-            document.getElementById("wordButton").addEventListener("click", function () {
+            wordButton.addEventListener("click", function () {
                 let word = this.getAttribute("data-text");
                 textToSpeech(word);
             });
 
-            document.getElementById("sentenceButton").addEventListener("click", function () {
+            sentenceButton.addEventListener("click", function () {
                 let sentence = this.getAttribute("data-text");
                 textToSpeech(sentence);
             });
