@@ -41,6 +41,11 @@
                     echo "<h3 class='category_header'>" . $row['categoryName'] . " - " . $row['levelName'] . "</h3>";
                 }
 
+                else{
+                    //This is subject to change in the future
+                    echo "Failed to fetch category name and level name";
+                }
+
                 $getQuestions = "SELECT * FROM questions WHERE levelID = $levelID";
                 $resQuestions = $con->query($getQuestions);
 
@@ -100,7 +105,7 @@
 
             // Load voices and set the selectedVoice
             function initializeVoices() {
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     let voices = window.speechSynthesis.getVoices();
                     if (voices.length > 0) {
                         selectedVoice = voices.find(voice => voice.name === "Google US English") ||
@@ -111,11 +116,18 @@
                     } else {
                         window.speechSynthesis.onvoiceschanged = () => {
                             voices = window.speechSynthesis.getVoices();
-                            selectedVoice = voices.find(voice => voice.name === "Google US English") ||
+                            if(voices.length > 0){
+                                selectedVoice = voices.find(voice => voice.name === "Google US English") ||
                                             voices.find(voice => voice.lang === "en-US" && voice.name.toLowerCase().includes("female")) ||
                                             voices.find(voice => voice.lang === "en-US") ||
                                             voices[0];
-                            resolve();
+                                resolve();
+                            }
+
+                            else{
+                                reject("No voices available");
+                            }
+                            
                         };
                     }
                 });
@@ -235,9 +247,14 @@
             submitButton.addEventListener("click", submitAnswer);
 
             // Initialize the voices and load the first question
-            initializeVoices().then(() => {
-                loadQuestion(currentQuestionIndex);
-            });
+            initializeVoices()
+                .then(() => {
+                    loadQuestion(currentQuestionIndex);
+                })
+                .catch((error) => {
+                    //This is subject to change in the future
+                    console.error("Error initializing voices:", error);
+                });
         </script>
     </body>
 </html>
