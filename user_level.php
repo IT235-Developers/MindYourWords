@@ -168,12 +168,53 @@
                     sentenceButton.setAttribute("data-text", questions[index].sampleSentence);
                     userInputField.value = ""; // Clear input field
                     feedback.innerText = ""; // Clear feedback
+
+                    const payload = {
+                        word: questions[index].word,
+                    };
+
+                    // Send the current word to score_check_endpoint.php
+                    fetch('score_check_endpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log('Score check updated:', result);
+                    })
+                    .catch(error => console.error('Error updating score check:', error));
+
+
                     textToSpeech(questions[index].word); // Read the word
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
                         }, 1000);
 
                 } else {
+                    const levelID = <?php echo json_encode($levelID); ?>;
+
+                    const payload = {
+                        levelID: levelID,
+                        score: score,
+                    };
+
+                    // Send the current levelID and score to setLevelHistoryScoreEndpoint.php
+                    fetch('setLevelHistoryScoreEndpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log('Score check updated:', result);
+                    })
+                    .catch(error => console.error('Error updating score check:', error));
+                    
                     questionCompletedSound.play();
                     question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
                 }
@@ -221,6 +262,19 @@
                     feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
+                    // Send the answer to answer_endpoint.php
+                    const payload = { answer: userInput };
+                    fetch('answer_endpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => console.log('Answer recorded:', result))
+                    .catch(error => console.error('Error recording answer:', error));
+
                     // Disable the submit button whenever you get the correct answer
                     submitButton.disabled = true;
 
@@ -244,6 +298,19 @@
                         feedback.innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
+
+                        // Send the answer to answer_endpoint.php
+                        const payload = { answer: userInput };
+                        fetch('answer_endpoint.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                        .then(response => response.text())
+                        .then(result => console.log('Answer recorded:', result))
+                        .catch(error => console.error('Error recording answer:', error));
 
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
