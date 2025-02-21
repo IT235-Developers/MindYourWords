@@ -47,6 +47,7 @@ include("connection.php");
                     ?>
                 </div>
             </div>
+            <button type="submit" class="btn delete mt-3 float-end">Logout</button>
         </div>
     </body>
 </html>

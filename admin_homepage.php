@@ -109,6 +109,7 @@ if (isset($_POST['btn_addCategory'])) {
                     ?>
                 </div>
             </div>
+            <button type="submit" class="btn delete mt-3 float-end">Logout</button>
         </div>
 
         <script src="js/shared-script.js"></script>
