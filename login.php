@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 				<div class="d-flex flex-column justify-content-center" style="margin-top: 32px;">
 					<p class="text-center text-secondary mb-1"><a href="terms_and_conditions.php">Terms and Conditions</a></p>
-					<p class="text-center text-secondary mb-1"><a href="all_about_us.php">All About Us</a></p>
+					<p class="text-center text-secondary mb-1"><a href="about_us.php">All About Us</a></p>
 				</div>
 			</form>
 		</div>
