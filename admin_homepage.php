@@ -54,7 +54,7 @@ if (isset($_POST['btn_addCategory'])) {
     </head>
     <body>
 
-        <div id="overlay" onclick="hideForm()"></div>
+        <div id="overlay"></div>
         <div class="container-fluid main_container">
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
@@ -66,9 +66,13 @@ if (isset($_POST['btn_addCategory'])) {
                     <form action="" method="POST" class="myForm">
                         <input type="text" name="txt_category" placeholder="Category Name" class="inputFieldAdd" required>
                         <button type="submit" class="btn btn_add update float-end" name="btn_addCategory">Update</button>
+                        <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
                     </form>
                 </div>
-                <button onclick="showForm()" class="btn_add"> + Add Category</button>
+                <button id="btn_add" class="btn_add"> + Add Category</button>
+
+                <!-- Display flash message when deleting category -->
+                <?php displayFlashMessage(); ?>
 
                 <!-- Display flash message when deleting category -->
                 <?php displayFlashMessage(); ?>
@@ -105,22 +109,11 @@ if (isset($_POST['btn_addCategory'])) {
                     ?>
                 </div>
             </div>
+            <form action="auth/logout.php" method="POST">
+                <button type="submit" class="btn delete mt-3 float-end">Logout</button>
+            </form>
         </div>
 
-        <script>
-            function showForm() {
-                var form = document.getElementById("myForm");
-                var overlay = document.getElementById("overlay");
-                form.style.display = "block";
-                overlay.style.display = "block"; // Show the overlay
-            }
-
-            function hideForm() {
-                var form = document.getElementById("myForm");
-                var overlay = document.getElementById("overlay");
-                form.style.display = "none";
-                overlay.style.display = "none"; // Hide the overlay
-            }
-        </script>
+        <script src="js/shared-script.js"></script>
     </body>
 </html>

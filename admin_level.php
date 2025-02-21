@@ -24,7 +24,7 @@ function displayFlashMessage() {
 // Handle add question form submission
 if (isset($_POST['btn_addQuestion'])) {
     $levelID = $_POST['txt_levelHID'];
- 
+
     $word = mysqli_real_escape_string($con, $_POST['txt_addWord']);
     $sampleSentence = mysqli_real_escape_string($con, $_POST['txt_addExample']);
     $definition = mysqli_real_escape_string($con, $_POST['txt_addDescription']);
@@ -105,7 +105,7 @@ if (isset($_POST['btn_deleteLevel'])) {
                 echo "<h3 class='category_header'>" . $row['categoryName'] . " - " . $row['levelName'] . "</h3>";
             }
             ?>
-            <button onclick="showForm('<?= $levelID; ?>')" class="btn_add">+ Add Question</button>
+            <button data-levelid="<?= $levelID; ?>" class="btn_add" id="btn_add">+ Add Question</button>
 
             <!-- Display Flash Messages -->
             <?php displayFlashMessage(); ?>
@@ -161,26 +161,11 @@ if (isset($_POST['btn_deleteLevel'])) {
             <input type="text" name="txt_addDescription" style="width: 100%" placeholder="Enter Definition" class="mb-2" required>
             <input type="hidden" id="txt_levelHID" name="txt_levelHID">
             <button type="submit" class="btn btn_add update float-end" name="btn_addQuestion">Add Question</button>
+            <button type="button" class="btn btn_add cancel float-end" id="btn_cancel">Cancel</button>
         </form>
     </div>
-    <div id="overlay" onclick="hideForm()" style="display: none;"></div>
+    <div id="overlay" style="display: none;"></div>
 
-    <script>
-        function showForm(levelID) {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            var levelInput = document.getElementById("txt_levelHID");
-            levelInput.value = levelID;
-            form.style.display = "block";
-            overlay.style.display = "block";
-        }
-
-        function hideForm() {
-            var form = document.getElementById("myForm");
-            var overlay = document.getElementById("overlay");
-            form.style.display = "none";
-            overlay.style.display = "none";
-        }
-    </script>
+    <script src="js/shared-script.js"></script>
 </body>
 </html>

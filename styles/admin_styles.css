@@ -52,7 +52,7 @@ body{
 }
 .btn_add{
 	display: flex;
-	margin-left: 25px;
+	margin-left: 10px;
 	margin-top: 10px;
 	background: none;
 	border: none;
@@ -92,6 +92,14 @@ th{
 .update:hover{
 	background-color: #218838;
 	color: #fff;
+}
+.cancel{
+	background-color:  #919191;
+	color: #FFF;
+}
+.cancel:hover{
+	background-color:  #6a6a6a;
+	color: #FFF;
 }
 .back{
 	background-color: #007BFF;
@@ -137,8 +145,47 @@ th{
 .inputFieldAdd{
 	width: 100%;
 }
-.form-control{
+
+.form-group{
 	margin-bottom: 10px;
+}
+
+.btn_tts{
+	background-color: #004873;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	transition: transform 0.3s ease-in-out;
+}
+.btn_tts:hover{
+	transform: scale(1.1);
+    cursor: pointer;
+}
+@keyframes correct-answer {
+    0% { background-color: #d4edda; transform: scale(1); }
+    50% { background-color: #c3e6cb; transform: scale(1.05); }
+    100% { background-color: #d4edda; transform: scale(1); }
+}
+
+@keyframes incorrect-answer {
+    0% { background-color: #f8d7da; transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { background-color: #f8d7da; transform: translateX(0); }
+}
+
+.correct {
+    animation: correct-answer 0.5s ease-out;
+}
+
+.incorrect {
+    animation: incorrect-answer 0.5s ease-out;
+}
+
+.input-group-text{
+	background-color: rgb(241, 241, 241);
 }
 
 @media only screen and (max-width: 992px) {

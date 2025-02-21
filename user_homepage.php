@@ -1,3 +1,21 @@
+<?php
+session_start();
+include("connection.php");
+
+function isLevelsAvailable($con, $row) {
+    $categoryID = $row['categoryID'];
+    $sqlCheckLevels = "SELECT COUNT(*) as levelCount FROM level WHERE categoryID = '$categoryID'";
+    $resCheckLevels = $con->query($sqlCheckLevels);
+    $levelData = $resCheckLevels->fetch_assoc();
+
+    if ($levelData['levelCount'] > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,20 +30,24 @@
         <div class="container-fluid main_container">
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
-                <h3 class="welcome_header">Welcome, User!</h3>
+                <h3 class="welcome_header">
+                    <?php 
+                    $username = $_SESSION['user']['username'];
+                    
+                    echo "Welcome, {$username}!"; 
+                    ?>
+                </h3>
 
                 <!-- Display Categories -->
                 <div class="row">
                     <?php
-                        session_start();
-                        include("connection.php");
-
                         $sqlDisplayCategories = "SELECT * FROM category";
                         $resDisplayCategories = $con->query($sqlDisplayCategories);
 
                         if ($resDisplayCategories->num_rows > 0) {
                             while ($row = $resDisplayCategories->fetch_assoc()) {
-                                echo "
+                                if (isLevelsAvailable($con,$row)) {
+                                    echo "
                                     <div class='col-12 col-lg-6 g-3'>
                                         <form action='user_category.php' method='POST'>
                                             <input type='text' name='txt_categoryHID' value='" . $row['categoryID'] . "' hidden>
@@ -35,11 +57,15 @@
                                         </form>
                                     </div>
                                 ";
+                                }
                             }
                         }
                     ?>
                 </div>
             </div>
+            <form action="auth/logout.php" method="POST">
+                <button type="submit" class="btn delete mt-3 float-end">Logout</button>
+            </form>
         </div>
     </body>
 </html>
