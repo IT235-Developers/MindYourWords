@@ -84,7 +84,6 @@
         </div>
         <form method="POST">
             <input type="hidden" name="txt_categoryHID" value="<?= $categoryHID ?>">
-            <button type="submit" name="btn_deleteCategory" class="btn delete mt-3 float-end">Delete</button>
             <a class="btn back float-end mt-3 me-2" href="user_homepage.php">Back</a>
         </form>
     </div>
