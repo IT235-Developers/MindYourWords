@@ -30,6 +30,21 @@
                     exit();
                 }
 
+                //Whenever the user enters a level, create a history for that
+                $sqlInsertLevelHistory = "INSERT INTO level_history(userID, levelID, score) 
+                VALUES('$userID','$levelID', 0)";
+
+                $resInsertLevelHistory = $con->query($sqlInsertLevelHistory);
+
+                if($resInsertLevelHistory){
+                    echo "success!";
+
+                }
+
+                else{
+                    echo "failed!";
+                }
+
                 $sqlCategoryLevelName = "SELECT c.categoryName, l.levelName FROM category c
                                         JOIN level l ON c.categoryID = l.categoryID 
                                         WHERE c.categoryID = $categoryID AND l.levelID = $levelID";
