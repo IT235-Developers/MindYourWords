@@ -165,6 +165,10 @@
 
                 userInputField.classList.remove("correct", "incorrect");
 
+                //reset back the wrongSound
+                wrongSound.pause();
+                wrongSound.currentTime = 0;
+
                 if (userInput === correctWord) {
                     correctSound.play();
                     cancelOngoingSpeech();
