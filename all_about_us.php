@@ -4,29 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/all_about_us.css">
 	<title>About the Developers</title>
-</head>
-   <style>
-        #heading {
-            text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .main_container {
-            width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-        .content {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 <body>
     <div class="container-fluid main_container">

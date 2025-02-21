@@ -17,9 +17,7 @@ body{
 #heading {
     text-align: center;
 }
-#greetings {
-    font-size: 15px;
-}
+
 .main_container {
     width: 400px;
     margin: auto;
