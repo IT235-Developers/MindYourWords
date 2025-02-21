@@ -23,7 +23,14 @@ class AuthController {
         $user = $this->userModel->login($email, $password);
         if ($user) {
             $_SESSION['user'] = $user;
-            header("Location: user_homepage.php");
+            $role = $user["roleID"];
+            
+            if ($role === 1) {
+                header("Location: admin_homepage.php");
+            } else if ($role === 2) {
+                header("Location: user_homepage.php");
+            } 
+
         } else {
             setFlashMessage("danger", "Invalid email or password. Please try again.");
         }
