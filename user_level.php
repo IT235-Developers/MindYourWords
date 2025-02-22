@@ -282,7 +282,8 @@
             function displayResults() {
                 percentage = (score / overall_score * 100).toFixed(2) + '%';
 
-                let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><h4 style="color: #004873; font-weight: bold; margin-bottom: 40px; text-align: center;">${percentage} Accuracy</h4>`;
+                let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><h4 style="color: #004873; font-weight: bold; text-align: center;">${percentage} Accuracy</h4>`;
+                resultHTML += `<p style="text-align: center; margin-bottom: 40px"><b>Score</b>: ${score}/${overall_score}</p>`;
                 resultHTML += `
                 <div class="container text-center">
                     <div class="row fw-bold mb-2">
