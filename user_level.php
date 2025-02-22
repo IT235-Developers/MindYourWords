@@ -196,7 +196,7 @@
                     .then(result => {
                         console.log('Score check updated:', result);
                     })
-                    .catch(error => console.error('Error updating score check:', error));
+                    .catch(error => console.error('score_check record insertion failed:', error));
 
 
                     textToSpeech(questions[index].word); // Read the word
@@ -222,9 +222,9 @@
                     })
                     .then(response => response.text())
                     .then(result => {
-                        console.log('Score check updated:', result);
+                        console.log('Level history score updated', result);
                     })
-                    .catch(error => console.error('Error updating score check:', error));
+                    .catch(error => console.error('Error updating level history score:', error));
                     
                     questionCompletedSound.play();
                     question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
@@ -283,8 +283,8 @@
                         body: JSON.stringify(payload)
                     })
                     .then(response => response.text())
-                    .then(result => console.log('Answer recorded:', result))
-                    .catch(error => console.error('Error recording answer:', error));
+                    .then(result => console.log('correct answer recorded:', result))
+                    .catch(error => console.error('error recording correct answer:', error));
 
                     // Disable the submit button whenever you get the correct answer
                     submitButton.disabled = true;
@@ -320,8 +320,8 @@
                             body: JSON.stringify(payload)
                         })
                         .then(response => response.text())
-                        .then(result => console.log('Answer recorded:', result))
-                        .catch(error => console.error('Error recording answer:', error));
+                        .then(result => console.log('wrong nswer recorded:', result))
+                        .catch(error => console.error('error recording wrong answer:', error));
 
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
