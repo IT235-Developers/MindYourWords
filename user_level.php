@@ -223,6 +223,7 @@
                     .then(response => response.text())
                     .then(result => {
                         console.log('Level history score updated', result);
+                        window.location.href = 'user_questions_completed.php';
                     })
                     .catch(error => console.error('Error updating level history score:', error));
                     
