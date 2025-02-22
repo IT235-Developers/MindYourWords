@@ -93,6 +93,8 @@
             let selectedVoice = null;
             let attempts = 0;
             let score = 0; // Initialize score
+            let results = [];
+            let attempts_list = [];
 
             const userInputField = document.getElementById("userInput");
             
@@ -157,10 +159,9 @@
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
                         }, 1000);
-
                 } else {
                     questionCompletedSound.play();
-                    question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
+                    displayResults();
                 }
             }
 
@@ -206,11 +207,25 @@
                     feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
+                    // Store attempts
+                    attempts_list.push({
+                        spelled_word: userInput,
+                        correct: true
+                    })
+
+                    // Store result
+                    results.push({
+                        question: questions[currentQuestionIndex].word,
+                        attempts: attempts_list,
+                    });
+
+
                     // Disable the submit button whenever you get the correct answer
                     submitButton.disabled = true;
 
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
+                    attempts_list = [];
 
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
@@ -222,13 +237,28 @@
                 } else {
                     wrongSound.play();
                     attempts++;
+
+                    // Store attempts
+                    attempts_list.push({
+                        spelled_word: userInput,
+                        correct: false
+                    });
+
                     if (attempts < 3) {
                         feedback.innerHTML = `<span class='text-danger'>Try again. You have ${3 - attempts} attempt(s) left.</span>`;
                     } else {
                         cancelOngoingSpeech();
                         feedback.innerHTML = `<span class='text-danger'>Nice try! The correct spelling is <strong>'${correctWord}'</strong>.</span>`;
+                        
+                        // Store result
+                        results.push({
+                            question: questions[currentQuestionIndex].word,
+                            attempts: attempts_list
+                        });
+
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
+                        attempts_list = [];
 
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
@@ -245,6 +275,37 @@
                         userInputField.classList.remove("incorrect");
                     }, 500);
                 }
+            }
+
+            function displayResults() {
+                let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><p>Your total score is: <strong>${score}</strong></p>`;
+                resultHTML += `
+                <div class="container text-center">
+                    <div class="row fw-bold mb-2">
+                        <div class="col-1 text-center">#</div>
+                        <div class="col text-center">Word</div>
+                        <div class="col text-center">User Spelling</div>
+                        <div class="col-2 text-center">Mark</div>
+                    </div>
+                `;
+                results.forEach((result, index) => {
+                    resultHTML += `
+                    <div class="row mb-2">
+                        <div class="col-1">${index + 1}</div>
+                        <div class="col">${result.question}</div>
+                        <div class="col" style="display: flex; flex-direction: column">${result.attempts.map(attempt => `
+                            <div style="padding: 5px; border-radius: 5px; color: white; background-color: ${attempt.correct ? '#198754' : '#DC3545'}; margin-bottom: 5px;">
+                                <img src="resources/${attempt.correct ? 'check_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24' : 'close_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24'}.svg" style="width: 16px; height: 16px; margin-right: 5px;">
+                                ${attempt.spelled_word}
+                            </div>`).join('')}
+                        </div>
+                        <div class="col-2">${result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">Correct</span>' : '<span class="text-danger">Incorrect</span>'}</div>
+                    </div>
+                    <hr>
+                    `;
+                });
+                resultHTML += `</div>`;
+                question_container.innerHTML = resultHTML;
             }
 
             btn_cancel.addEventListener("click", cancelOngoingSpeech);
