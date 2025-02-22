@@ -289,7 +289,7 @@
                         <div class="col-1 text-center">#</div>
                         <div class="col text-center">Word</div>
                         <div class="col text-center">User Spelling</div>
-                        <div class="col-2 text-center">Mark</div>
+                        <div class="col-2 text-center">Score</div>
                     </div>
                 `;
                 results.forEach((result, index) => {
@@ -303,7 +303,12 @@
                                 ${attempt.spelled_word}
                             </div>`).join('')}
                         </div>
-                        <div class="col-2">${result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">Correct</span>' : '<span class="text-danger">Incorrect</span>'}</div>
+                        <div class="col-2">
+                            ${result.attempts.length === 1 && result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">3 pts</span>' : 
+                              result.attempts.length === 2 ? '<span class="text-success">2 pts</span>' : 
+                              result.attempts.length === 3 && result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">1 pt</span>' : 
+                              '<span class="text-danger">0 pts</span>'}
+                        </div>
                     </div>
                     <hr>
                     `;
