@@ -34,17 +34,28 @@
                     exit();
                 }
 
-                //check if the levelID already exists in the level_history table
+                
                 $sqlCheckLevelID = "SELECT levelID FROM level_history WHERE levelID = '$levelID' AND userID = '$userID'";
+                $sqlCheckLevelQuestions = "SELECT * FROM questions WHERE levelID = '$levelID'";
 
                 $resCheckLevelID = $con->query($sqlCheckLevelID);
+                $resCheckLevelQuestions = $con->query($sqlCheckLevelQuestions);
 
+                //check if the levelID already exists in the level_history table
                 if($resCheckLevelID->num_rows > 0){
                     getLevelHistoryID($con, $userID, $levelID);
                     header("Location: user_questions_completed.php");
                     exit;
                 }
 
+                //check if the current level contain questions
+                else if($resCheckLevelQuestions->num_rows == 0){
+                    setFlashMessage("danger", "No questions available");
+                    header("Location: user_category.php");
+                    exit;
+                }
+
+            
                 //Whenever the user enters a level, create a history for that
                 $sqlInsertLevelHistory = "INSERT INTO level_history(userID, levelID, score) 
                 VALUES('$userID','$levelID', 0)";
