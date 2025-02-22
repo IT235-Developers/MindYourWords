@@ -84,7 +84,7 @@
             </div>
 
             <form method="POST">
-                <a class="btn delete mt-3 float-start" href="user_category.php" id="btn_cancel">Cancel</a>
+                <a class="btn btn-outline-secondary mt-3 float-start" href="user_category.php" id="btn_cancel">Exit</a>
             </form>
         </div>
 
