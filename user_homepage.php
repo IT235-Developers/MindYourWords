@@ -28,9 +28,9 @@ function isLevelsAvailable($con, $row) {
     </head>
     <body>
         <div class="container-fluid main_container">
-            <div class="row">
+            <div class="row mb-3">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
-                <h3 class="welcome_header">
+                <h3 class="welcome_header text-center mb-4">
                     <?php 
                     $username = $_SESSION['user']['username'];
                     
