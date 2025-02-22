@@ -147,4 +147,28 @@ function deleteQuestionFromMainDb($questionID, $con) {
     }
 }
 
+function getLevelHistoryID($con, $userID, $levelID){
+    $getLevelHistoryID = "SELECT levelHistoryID FROM level_history WHERE userID = '$userID' AND
+    levelID = '$levelID';";
+
+    $resLevelHistoryID = $con->query($getLevelHistoryID);
+
+    if($resLevelHistoryID){
+        if($resLevelHistoryID->num_rows > 0){
+            $_SESSION['levelHistoryID'] = $resLevelHistoryID->fetch_assoc()['levelHistoryID'];
+        }
+
+        else{
+            //replace this with flash message because echoing before header() could cause issues
+            echo "Failed to fetch levelHistoryID";
+        }
+    }
+
+    else{
+        //replace this with flash message because echoing before header() could cause issues
+        echo "An error occured while executing the query";
+    }
+
+}
+
 ?>
