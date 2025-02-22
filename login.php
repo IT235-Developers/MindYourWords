@@ -19,40 +19,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<title>Log in Page</title>
 	</head>
 	<body>
-		<div class="container-fluid main_container d-flex flex-column justify-content-center">
-			<img class="secondary_logo" src="images\myw-secondary-logo.svg">
-			<h3>Welcome, English Learner!</h3>
-			<h6 class="mt-2">Sign in to your account.</h6>
+		<div class="container-fluid main_container d-flex justify-content-evenly flex-row">
+			<div class="col">
+				<img class="secondary_logo_auth" src="images\myw-secondary-logo.svg">
+			</div>
+			<div class="col-6">
+				<h3>Welcome, English Learner!</h3>
+				<h6 class="mt-2">Sign in to your account.</h6>
 
-			<?php displayFlashMessage() ?>
+				<?php displayFlashMessage() ?>
 
-			<form action="" method="POST">
-				<div class="form-group">
-					<label for="txt_email"></label>
-					<input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
-				</div>
-
-				<div class="form-group">
-					<label for="txt_password"></label>
-					<div class="input-group">
-						<input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
-						<span class="input-group-text" id="togglePassword" style="cursor: pointer;">
-							<i class="bi bi-eye"></i>
-						</span>
+				<form action="" method="POST">
+					<div class="form-group">
+						<label for="txt_email"></label>
+						<input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
 					</div>
-				</div>
 
-				<input type="submit" id="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
+					<div class="form-group">
+						<label for="txt_password"></label>
+						<div class="input-group">
+							<input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
+							<span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+								<i class="bi bi-eye"></i>
+							</span>
+						</div>
+					</div>
 
-				<div class="form-group">
-					<p class="mt-3 text-center">Don't have an account? <a href="sign_up.php">Register Here</a></p>
-				</div>
+					<input type="submit" id="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
 
-				<div class="d-flex flex-column justify-content-center" style="margin-top: 32px;">
-					<p class="text-center text-secondary mb-1"><a href="terms_and_conditions.php">Terms and Conditions</a></p>
-					<p class="text-center text-secondary mb-1"><a href="about_us.php">All About Us</a></p>
-				</div>
-			</form>
+					<div class="form-group">
+						<p class="mt-3 text-center">Don't have an account? <a href="sign_up.php">Register Here</a></p>
+					</div>
+
+					<div class="d-flex flex-column justify-content-center" style="margin-top: 32px;">
+						<p class="text-center text-secondary mb-0"><a href="terms_and_conditions.php">Terms and Conditions</a></p>
+						<p class="text-center text-secondary mb-0"><a href="about_us.php">All About Us</a></p>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<script src="auth/validation/login_script.js"></script>

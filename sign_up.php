@@ -14,50 +14,56 @@ require_once __DIR__ . '/components/flash_message.php';
       <title>Sign Up Page</title>
   </head>
   <body>
-    <div class="container-fluid main_container d-flex flex-column">
-      <img class="secondary_logo" src="images\myw-secondary-logo.svg">
-      <h3>Create an Account!</h3>
-      <h6 class="mt-2">Enter your details to register.</h6>
+    <div class="container-fluid main_container d-flex justify-content-evenly flex-row">
+      <div>
+        <img class="secondary_logo_auth" src="images\myw-secondary-logo.svg">
+      </div>
+      <div class="col-6"> 
+        <h3>Create an Account!</h3>
+        <h6 class="mt-2">Enter your details to register.</h6>
 
-      <?php displayFlashMessage() ?>
+        <?php displayFlashMessage() ?>
 
-      <form id="signupForm" action="auth/sign_up.php" method="POST">
-        <div class="form-group">
-          <label for="txt_username"></label>
-          <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="txt_email"></label>
-          <input type="email" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
-        </div>
-
-        <div class="form-group">
-          <label for="txt_password"></label>
-          <div class="input-group">
-            <input type="password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
-            <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
-              <i class="bi bi-eye"></i>
-            </span>
+        <form id="signupForm" action="auth/sign_up.php" method="POST">
+          <div class="form-group">
+            <label for="txt_username"></label>
+            <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" required/>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="txt_cpassword"></label>
-          <div class="input-group">
-            <input type="password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" required/>
-            <span class="input-group-text" id="toggleCPassword" style="cursor: pointer;">
-              <i class="bi bi-eye"></i>
-            </span>
+          <div class="form-group">
+            <label for="txt_email"></label>
+            <input type="email" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
           </div>
-        </div>
 
-        <div id="error-message" class="text-danger"></div>
+          <div class="form-group">
+            <label for="txt_password"></label>
+            <div class="input-group">
+              <input type="password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
+              <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                <i class="bi bi-eye"></i>
+              </span>
+            </div>
+          </div>
 
-        <input type="submit" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
-        
-        <p class="mt-3 text-center">Already have an account? <a href="login.php">Login here</a></p>
-      </form>
+          <div class="form-group">
+            <label for="txt_cpassword"></label>
+            <div class="input-group">
+              <input type="password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" required/>
+              <span class="input-group-text" id="toggleCPassword" style="cursor: pointer;">
+                <i class="bi bi-eye"></i>
+              </span>
+            </div>
+          </div>
+
+          <div id="error-message" class="text-danger"></div>
+
+          <input type="submit" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
+          
+          <p class="mt-3 text-center">Already have an account? <a href="login.php">Login here</a></p>
+        </form>
+      </div>
+    
+      
     </div>
 
     <script src="auth/validation/sign_up_script.js"></script>
