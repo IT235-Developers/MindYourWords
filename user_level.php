@@ -196,7 +196,7 @@
                     })
                     .then(response => response.text())
                     .then(result => {
-                        console.log('Score check updated:', result);
+                        console.log('score_check record insertion successfull', result);
                     })
                     .catch(error => console.error('score_check record insertion failed:', error));
 
