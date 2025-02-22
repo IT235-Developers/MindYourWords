@@ -49,8 +49,7 @@
                 $resInsertLevelHistory = $con->query($sqlInsertLevelHistory);
 
                 if($resInsertLevelHistory){
-                    echo "success!";
-
+                    getLevelHistoryID($con, $userID, $levelID);
                 }
 
                 else{
