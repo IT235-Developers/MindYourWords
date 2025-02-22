@@ -77,7 +77,7 @@
                     <th>#</th>
                     <th>Word</th>
                     <th>User Spelling</th>
-                    <th>Mark</th>
+                    <th>Points</th>
                 </tr>
                 <?php
                     include("connection.php");
@@ -90,13 +90,20 @@
 
                     if($resGetAnswerWord->num_rows > 0){
                         while($row = $resGetAnswerWord->fetch_assoc()){
-                            $mark = strtolower($row["word"]) == strtolower($row["answer"]) ? "correct" : "wrong";
+                            $icon = (strtolower($row["word"]) == strtolower($row["answer"]))
+                                ? "<span class='text-success'>&#x2714;</span>"  // Check mark (correct)
+                                : "<span class='text-danger'>&#x2718;</span>"; // Cross mark (wrong)
+
+                            $answer = (strtolower($row["word"]) == strtolower($row["answer"]))
+                                ? "<td class='bg-success rounded text-light'>".strtolower($row["answer"])."</td>"  
+                                : "<td class='bg-danger rounded text-light'>".strtolower($row["answer"])."</td>"; 
+
                             echo "
                                 <tr>
                                     <td>" .$wordNumber. "</td>
                                     <td>". strtolower($row["word"]) ."</td>
-                                    <td>". strtolower($row["answer"]) ."</td>
-                                    <td>". $mark ."</td>
+                                     ".$answer."
+                                    <td>". $row['points'] ."</td>
                                 </tr>
                             ";
 
