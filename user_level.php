@@ -111,8 +111,8 @@
                 <p id="feedback" class="mt-1"></p>
             </div>
 
-            <form method="POST">
-                <a class="btn delete mt-3 float-start" href="user_category.php" id="btn_cancel">Cancel</a>
+            <form action="user_category.php" method="POST">
+                <button type="submit" class="btn delete mt-3 float-start" name="btn_cancel" id="btn_cancel">Cancel</a>
             </form>
         </div>
 
