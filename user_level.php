@@ -14,6 +14,7 @@
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <?php
                 include("connection.php");
+                include("functions.php");
                 session_start();
 
                 if (isset($_POST['txt_levelHID']) && isset($_POST['txt_categoryHID'])) {
