@@ -15,11 +15,11 @@ require_once __DIR__ . '/components/flash_message.php';
   </head>
   <body>
     <div class="container-fluid main_container d-flex justify-content-evenly flex-row">
-      <div>
-        <img class="secondary_logo_auth" src="images\myw-secondary-logo.svg">
+      <div class="col">
+        <img class="secondary_logo_auth" src="images\myw-primary-logo.svg">
       </div>
       <div class="col-6"> 
-        <h3>Create an Account!</h3>
+        <h3 class="mb-4">Create an Account!</h3>
         <h6 class="mt-2">Enter your details to register.</h6>
 
         <?php displayFlashMessage() ?>

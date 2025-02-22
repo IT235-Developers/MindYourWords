@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<body>
 		<div class="container-fluid main_container d-flex justify-content-evenly flex-row">
 			<div class="col">
-				<img class="secondary_logo_auth" src="images\myw-secondary-logo.svg">
+				<img class="secondary_logo_auth" src="images\myw-primary-logo.svg">
 			</div>
 			<div class="col-6">
-				<h3>Welcome, English Learner!</h3>
+				<h3 class="mb-4">Welcome, English Learner!</h3>
 				<h6 class="mt-2">Sign in to your account.</h6>
 
 				<?php displayFlashMessage() ?>
