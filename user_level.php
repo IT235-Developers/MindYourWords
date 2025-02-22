@@ -93,6 +93,8 @@
             let selectedVoice = null;
             let attempts = 0;
             let score = 0; // Initialize score
+            let overall_score = questions.length * 3;
+            let percentage = "";
             let results = [];
             let attempts_list = [];
 
@@ -278,7 +280,9 @@
             }
 
             function displayResults() {
-                let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><p>Your total score is: <strong>${score}</strong></p>`;
+                percentage = (score / overall_score * 100).toFixed(2) + '%';
+
+                let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><h4 style="color: #004873; font-weight: bold; margin-bottom: 40px; text-align: center;">${percentage} Accuracy</h4>`;
                 resultHTML += `
                 <div class="container text-center">
                     <div class="row fw-bold mb-2">
