@@ -17,6 +17,8 @@
                 include("functions.php");
                 session_start();
 
+                $userID = $_SESSION['user']['userID'];
+
                 if (isset($_POST['txt_levelHID']) && isset($_POST['txt_categoryHID'])) {
                     $_SESSION['levelID'] = $_POST['txt_levelHID'];
                     $_SESSION['categoryID'] = $_POST['txt_categoryHID'];
@@ -25,7 +27,6 @@
                 if (isset($_SESSION['levelID']) && isset($_SESSION['categoryID'])) {
                     $levelID = $_SESSION['levelID'];
                     $categoryID = $_SESSION['categoryID'];
-                    $userID = $_SESSION['user']['userID'];
                 } else {
                     echo "<p class='text-danger'>Level ID or Category ID is missing.</p>";
                     header("Location: admin_category.php");
