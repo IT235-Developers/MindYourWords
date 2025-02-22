@@ -82,7 +82,7 @@
                 <?php
                     include("connection.php");
 
-                    $sqlGetAnswerWord = "SELECT answer, word FROM answer AS a INNER JOIN score_check AS sc
+                    $sqlGetAnswerWord = "SELECT answer, points, word FROM answer AS a INNER JOIN score_check AS sc
                     ON a.scoreCheckID = sc.scoreCheckID AND sc.levelHistoryID = '$levelHistoryID';";
 
                     $resGetAnswerWord = $con->query($sqlGetAnswerWord);

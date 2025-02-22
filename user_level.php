@@ -288,7 +288,10 @@
                     userInputField.classList.add("correct");
 
                     // Send the answer to answer_endpoint.php
-                    const payload = { answer: userInput };
+                    const payload = { 
+                        answer: userInput,
+                        points: points
+                    };
                     fetch('answer_endpoint.php', {
                         method: 'POST',
                         headers: {
@@ -325,7 +328,10 @@
                         attempts = 0; // Reset attempts
 
                         // Send the answer to answer_endpoint.php
-                        const payload = { answer: userInput };
+                        const payload = { 
+                            answer: userInput,
+                            points: 0
+                        };
                         fetch('answer_endpoint.php', {
                             method: 'POST',
                             headers: {
