@@ -67,7 +67,9 @@
                 $row = $resCategoryName->fetch_assoc();
             ?>
                 <h3 class="category_header"><?= $row['categoryName'] ?></h3>
-            <?php } ?>
+            <?php } 
+                displayFlashMessage();
+            ?>
 
             <div class="row">
                 <?php
