@@ -230,7 +230,6 @@
                     .catch(error => console.error('Error updating level history score:', error));
                     
                     questionCompletedSound.play();
-                    question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
                 }
             }
 
