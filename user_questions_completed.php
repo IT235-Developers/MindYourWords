@@ -29,10 +29,12 @@
                                         JOIN level l ON c.categoryID = l.categoryID 
                                         WHERE c.categoryID = $categoryID AND l.levelID = $levelID";
 
-                $getQuestions = "SELECT COUNT(*) AS questionCount FROM questions WHERE levelID = $levelID";
+                //get the total questions per round based on the number of words inserted in score_check table
+                //to prevent conflict when modifying the questions in the admin side
+                $getTotalQuestions = "SELECT COUNT(*) AS wordCount FROM score_check WHERE levelHistoryID = $levelHistoryID";
 
                 $resCategoryLevelName = $con->query($sqlCategoryLevelName);
-                $resQuestions = $con->query($getQuestions);
+                $resQuestions = $con->query($getTotalQuestions);
 
                 if ($resCategoryLevelName->num_rows > 0) {
                     $row = $resCategoryLevelName->fetch_assoc();
@@ -42,7 +44,7 @@
 
                     if($resQuestions->num_rows > 0){
                         $accuracy = 0;
-                        $questionsCount = (int) $resQuestions->fetch_assoc()['questionCount'];
+                        $questionsCount = (int) $resQuestions->fetch_assoc()['wordCount'];
                         $maximumPoints = $questionsCount *= 3;
 
                         $getCurrentLevelScore = "SELECT score FROM level_history WHERE levelID = '$levelID'
