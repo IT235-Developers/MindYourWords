@@ -15,6 +15,7 @@
                 <?php
                 include("connection.php");
                 include("functions.php");
+                include("components/flash_message.php");
                 session_start();
 
                 $userID = $_SESSION['user']['userID'];

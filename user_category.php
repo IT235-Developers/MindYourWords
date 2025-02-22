@@ -58,6 +58,8 @@
 
             <?php
             include("connection.php");
+            include("components/flash_message.php");
+
             $sqlCategoryName = "SELECT * FROM category WHERE categoryID = $categoryHID";
             $resCategoryName = $con->query($sqlCategoryName);
 
