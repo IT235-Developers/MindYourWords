@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<title>Log in Page</title>
 	</head>
 	<body>
-		<div class="container-fluid main_container d-flex justify-content-evenly flex-row">
+		<div class="container-fluid main_container d-flex justify-content-evenly flex-xxl-row flex-column">
 			<div class="col">
-				<img class="secondary_logo_auth" src="images\myw-primary-logo.svg">
+				<img class="secondary_logo_auth p-3" src="images\myw-primary-logo.svg">
 			</div>
-			<div class="col-6">
+			<div class="col-xxl-6">
 				<h3 class="mb-4">Welcome, English Learner!</h3>
 				<h6 class="mt-2">Sign in to your account.</h6>
 
