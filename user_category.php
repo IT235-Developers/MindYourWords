@@ -2,6 +2,16 @@
     session_start();
     include("connection.php");
 
+    if(isset($_POST['btn_cancel'])){
+        $levelHistoryID = $_SESSION['levelHistoryID'];
+
+        $sqlDeleteLevelHistory = "DELETE FROM level_history WHERE levelHistoryID = '$levelHistoryID'";
+
+        if(!$con->query($sqlDeleteLevelHistory)){
+            echo "Level history record deletion failed";
+        }
+    }
+
     // Store categoryID in session when form is submitted
     if (isset($_POST['txt_categoryHID'])) {
         $_SESSION['categoryID'] = $_POST['txt_categoryHID'];
