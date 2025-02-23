@@ -246,4 +246,79 @@ function getWinningRate($con, $userID){
     }
 }
 
+function insertUserStats($con, $userID){
+    $getAverageScore = getAverageScore($con, $userID); //object or false
+    $getHighestScore = getHighestScore($con, $userID); //object or false
+    $getTotalGamesPlayed = getTotalGamesPlayed($con, $userID); //object or false
+    $getWinningRate = getWinningRate($con, $userID);
+
+    if($getAverageScore && $getHighestScore && $getTotalGamesPlayed && $getWinningRate){
+        if($getAverageScore->num_rows > 0 && $getHighestScore->num_rows > 0 && $getTotalGamesPlayed->num_rows > 0 &&
+        $getWinningRate->num_rows > 0){
+            $averageScore = $getAverageScore->fetch_assoc()['average_score'];
+            $highestScore = $getHighestScore->fetch_assoc()['highest_score'];
+            $totalGamesPlayed = $getTotalGamesPlayed->fetch_assoc()['total_games_played'];
+            $winningRate = $getWinningRate->fetch_assoc()['winning_rate_percentage'];
+            
+            $sqlInsertUserStats = "INSERT INTO user_stats (userID, averageScore, highestScore, totalGamesPlayed,
+            winningRate) VALUES ('$userID', '$averageScore', '$highestScore', '$totalGamesPlayed', '$winningRate')";
+
+            $resInsertUserStats = $con->query($sqlInsertUserStats);
+
+            if(!$resInsertUserStats){
+                echo "User stats record insertion failed";
+            }
+        }
+
+        else{
+            echo "No average score, highest score or total games played record found";
+        }
+    }
+
+    else{
+        return "Query for getting the average, highest score, or total games played failed to execute";
+    }
+
+
+}
+
+function updateUserStats($con, $userID){
+    $getAverageScore = getAverageScore($con, $userID); //object or false
+    $getHighestScore = getHighestScore($con, $userID); //object or false
+    $getTotalGamesPlayed = getTotalGamesPlayed($con, $userID); //object or false
+    $getWinningRate = getWinningRate($con, $userID);
+
+    if($getAverageScore && $getHighestScore && $getTotalGamesPlayed && $getWinningRate){
+        if($getAverageScore->num_rows > 0 && $getHighestScore->num_rows > 0 && $getTotalGamesPlayed->num_rows > 0 &&
+        $getWinningRate->num_rows > 0){
+            $averageScore = $getAverageScore->fetch_assoc()['average_score'];
+            $highestScore = $getHighestScore->fetch_assoc()['highest_score'];
+            $totalGamesPlayed = $getTotalGamesPlayed->fetch_assoc()['total_games_played'];
+            $winningRate = $getWinningRate->fetch_assoc()['winning_rate_percentage'];
+            
+            $sqlUpdateUserStats = "UPDATE user_stats
+                SET averageScore = '$averageScore',
+                    highestScore = '$highestScore',
+                    totalGamesPlayed = '$totalGamesPlayed',
+                    winningRate = '$winningRate'
+                WHERE userID = '$userID'
+            ";
+
+            $resUpdateUserStats = $con->query($sqlUpdateUserStats);
+
+            if(!$resInsertUserStats){
+                echo "User stats alteration failed";
+            }
+        }
+
+        else{
+            echo "No average score, highest score or total games played record found";
+        }
+    }
+
+    else{
+        return "Query for getting the average, highest score, or total games played failed to execute";
+    }
+}
+
 ?>
