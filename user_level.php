@@ -296,7 +296,7 @@
 
                     // Send the answer to answer_endpoint.php
                     const payload = { 
-                        answer: userInput,
+                        attemptsArray: attemptsArray,
                         points: points
                     };
                     fetch('answer_endpoint.php', {
@@ -337,7 +337,7 @@
 
                         // Send the answer to answer_endpoint.php
                         const payload = { 
-                            answer: userInput,
+                            attemptsArray: attemptsArray,
                             points: 0
                         };
                         fetch('answer_endpoint.php', {
