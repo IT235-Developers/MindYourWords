@@ -1,4 +1,34 @@
+<?php
+    session_start();
     include("connection.php");
+
+    $userID = $_SESSION['user']['userID'];
+    $username = $_SESSION['user']['username'];
+
+    $sqlGetUserStats = "SELECT averageScore, highestScore, totalGamesPlayed, winningRate
+        FROM user_stats WHERE userID = '$userID';";
+
+    $resGetUserStats = $con->query($sqlGetUserStats);
+
+    if($resGetUserStats){
+        if($resGetUserStats->num_rows > 0){
+            $userStats = $resGetUserStats->fetch_assoc();
+            $averageScore = $userStats['averageScore'];
+            $highestScore =  $userStats['highestScore'];
+            $totalGamesPlayed = $userStats['totalGamesPlayed'];
+            $winningRate = $userStats['winningRate'];
+        }
+
+        else{
+            echo "No user stats record found";
+        }
+    }
+
+    else{
+        echo "Query for getting the users stats failed to execute";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
