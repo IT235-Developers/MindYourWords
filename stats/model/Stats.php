@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/database_connection/database.php';
+require_once __DIR__ . '/../database_connection/database.php';
 
 class Stats {
     private $pdo;
@@ -16,8 +16,8 @@ class Stats {
                 levelHistoryID INT PRIMARY KEY AUTO_INCREMENT,
                 userID INT,
                 levelID INT,
-                FOREIGN KEY (userID) REFERENCES Users(userID),
-                FOREIGN KEY (levelID) REFERENCES Levels(levelID)
+                FOREIGN KEY (userID) REFERENCES users(userID),
+                FOREIGN KEY (levelID) REFERENCES level(levelID)
             )",
             "CREATE TABLE IF NOT EXISTS ScoreCheck (
                 scoreCheckID INT PRIMARY KEY AUTO_INCREMENT,
@@ -63,11 +63,8 @@ class Stats {
             continue;
             }
 
-            if (isset($result['answers'])) {
-                foreach ($result['answers'] as $answer) {
-                    $this->insertAnswer($scoreCheckID, $answer);
-                }
-            }
+            $lastAttempt = end($result['attempts']);
+            $this->insertAnswer($scoreCheckID, $lastAttempt['spelled_word']);
         }
     }
 

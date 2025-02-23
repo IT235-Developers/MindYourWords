@@ -315,6 +315,34 @@
                 });
                 resultHTML += `</div>`;
                 question_container.innerHTML = resultHTML;
+
+                submitResults();
+            }
+
+            function submitResults() {
+                const userID = <?php echo isset($_SESSION['user']['userID']) ? json_encode($_SESSION['user']['userID']) : 'null'; ?>;
+                const levelID = <?php echo isset($levelID) ? json_encode($levelID) : 'null'; ?>;
+
+                
+                fetch('stats/submit_results.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type' : 'application/json'},
+                    body: JSON.stringify({
+                        userID: userID,
+                        levelID: levelID,
+                        results: results
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Results submitted successfully");
+                    } else {
+                        console.log("Something went wrong");
+                    }
+                })
+                .catch(error => {
+                    console.log("Network error:", error);
+                });
             }
 
             btn_cancel.addEventListener("click", cancelOngoingSpeech);
