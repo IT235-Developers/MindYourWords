@@ -274,6 +274,11 @@
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
 
+                // Record the attempt
+                attemptsArray.push(userInput === "" ? "(blank)" : userInput);
+
+                console.log(attemptsArray);
+
                 userInputField.classList.remove("correct", "incorrect");
 
                 //reset back the wrongSound
