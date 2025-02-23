@@ -12,4 +12,21 @@ $sqlUpdateLevelHistory = "UPDATE level_history SET score = '$score' WHERE levelI
 
 $resUpdateLevelHistory = $con->query($sqlUpdateLevelHistory);
 
+$getUserStats = getUserStats($con, $userID);
+
+if($getUserStats){
+    if($getUserStats->num_rows == 0){
+        insertUserStats($con, $userID);
+    }
+
+    else{
+        updateUserStats($con, $userID);
+    }
+    
+}
+
+else{
+    echo "Query for getting user stats failed";
+}
+
 ?>
