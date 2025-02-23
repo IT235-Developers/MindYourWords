@@ -151,6 +151,14 @@
 
             let attemptsArray = [];
 
+            window.addEventListener('beforeunload', function (event) {
+                let formData = new FormData();
+                formData.append('exit_window', '1');
+
+                // Use navigator.sendBeacon to send the request to user_category.php
+                navigator.sendBeacon('user_category.php', formData);
+            });
+
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
             }
