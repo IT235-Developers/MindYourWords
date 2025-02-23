@@ -92,7 +92,8 @@
             let currentQuestionIndex = 0;
             let selectedVoice = null;
             let attempts = 0;
-            let score = 0; // Initialize score
+            let question_score = 0;
+            let gotten_score = 0; // Initialize score
             let overall_score = questions.length * 3;
             let percentage = "";
             let results = [];
@@ -205,7 +206,8 @@
                     cancelOngoingSpeech();
 
                     let points = 3 - attempts; // Calculate points based on attempts
-                    score += points; // Update score
+                    gotten_score += points; // Update score
+                    question_score += points;
                     feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
@@ -219,7 +221,7 @@
                     results.push({
                         question: questions[currentQuestionIndex].word,
                         attempts: attempts_list,
-                        points: score
+                        points: question_score
                     });
 
 
@@ -229,6 +231,7 @@
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
                     attempts_list = [];
+                    question_score = 0;
 
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
@@ -257,12 +260,14 @@
                         results.push({
                             question: questions[currentQuestionIndex].word,
                             attempts: attempts_list,
-                            points: score
+                            points: question_score
                         });
 
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
                         attempts_list = [];
+                        question_score = 0;
+
 
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
@@ -282,10 +287,10 @@
             }
 
             function displayResults() {
-                percentage = (score / overall_score * 100).toFixed(2) + '%';
+                percentage = (gotten_score / overall_score * 100).toFixed(2) + '%';
 
                 let resultHTML = `<h4 style="color: #3DA272; text-align: center;">Congratulations!</h4><h4 style="color: #004873; font-weight: bold; text-align: center;">${percentage} Accuracy</h4>`;
-                resultHTML += `<p style="text-align: center; margin-bottom: 40px"><b>Score</b>: ${score}/${overall_score}</p>`;
+                resultHTML += `<p style="text-align: center; margin-bottom: 40px"><b>Score</b>: ${gotten_score}/${overall_score}</p>`;
                 resultHTML += `
                 <div class="container text-center">
                     <div class="row fw-bold mb-2">
