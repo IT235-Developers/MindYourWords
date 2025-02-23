@@ -75,10 +75,10 @@
 
             <table>
                 <tr>
-                    <th>#</th>
-                    <th>Word</th>
-                    <th>User Spelling</th>
-                    <th>Points</th>
+                    <th class="text-center">#</th>
+                    <th class="text-center">Word</th>
+                    <th class="text-center">User Spelling</th>
+                    <th class="text-center">Points</th>
                 </tr>
                 <?php
                     include("connection.php");
@@ -120,14 +120,14 @@
 
                             echo "
                                 <tr>
-                                    <td>" .$wordNumber. "</td>
-                                    <td>". strtolower($row["word"]) ."</td>
+                                    <td class='text-center'>" .$wordNumber. "</td>
+                                    <td class='text-center'>". strtolower($row["word"]) ."</td>
                                     <td>
                                         <div>".$answer1."</div>
                                         <div class='mt-1'>".$answer2."</div>
                                         <div class='mt-1'>".$answer3."</div>
                                     </td>
-                                    <td>". $row['points'] ."</td>
+                                    <td class='text-center'>". $row['points'] ."</td>
                                 </tr>
                             ";
 
