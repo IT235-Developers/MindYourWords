@@ -315,6 +315,7 @@
 
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
+                    attemptsArray = []; // Clear attempts for the next question
 
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
@@ -352,6 +353,7 @@
 
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
+                        attemptsArray = []; // Clear attempts for the next question
 
                         setTimeout(() => {
                             loadQuestion(currentQuestionIndex);
