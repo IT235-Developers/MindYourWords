@@ -274,6 +274,12 @@
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
 
+                // Check if input is empty
+                if (userInput === "") {
+                    feedback.innerHTML = `<span class='text-danger'>Please enter a word before submitting.</span>`;
+                    return; // Stop further processing if input is empty
+                }
+
                 // Record the attempt
                 attemptsArray.push(userInput === "" ? "(blank)" : userInput);
 
