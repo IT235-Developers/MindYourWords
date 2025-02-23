@@ -219,6 +219,7 @@
                     results.push({
                         question: questions[currentQuestionIndex].word,
                         attempts: attempts_list,
+                        points: score
                     });
 
 
@@ -255,7 +256,8 @@
                         // Store result
                         results.push({
                             question: questions[currentQuestionIndex].word,
-                            attempts: attempts_list
+                            attempts: attempts_list,
+                            points: score
                         });
 
                         currentQuestionIndex++;
@@ -305,10 +307,7 @@
                             </div>`).join('')}
                         </div>
                         <div class="col-2">
-                            ${result.attempts.length === 1 && result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">3 pts</span>' : 
-                              result.attempts.length === 2 ? '<span class="text-success">2 pts</span>' : 
-                              result.attempts.length === 3 && result.attempts[result.attempts.length - 1].correct ? '<span class="text-success">1 pt</span>' : 
-                              '<span class="text-danger">0 pts</span>'}
+                            ${result.points > 0 ? `<span class="text-success">${result.points} pts</span>` : '<span class="text-danger">0 pts</span>'}
                         </div>
                     </div>
                     <hr>
