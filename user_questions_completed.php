@@ -98,24 +98,28 @@
                             $answer1 = "";
                             if (!empty(trim($row["answer1"]))) {
                                 $answer1 = (strtolower($row["word"]) == strtolower($row["answer1"]))
-                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer1"]) . 
-                                    "" . $correctIcon . "</div>"
-                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer1"]) . 
-                                    "". $wrongIcon ."</div>";
+                                    ? "<div class='d-flex justify-content-center align-items-center bg-success rounded 
+                                    text-light p-1 text-center'>" . $correctIcon . "" . strtolower($row["answer1"]) . "</div>"
+                                    : "<div class='bg-danger rounded text-light d-flex justify-content-center align-items-center 
+                                    p-1 text-center'>" . $wrongIcon . "" . strtolower($row["answer1"]) . "</div>";
                             }
                             
                             $answer2 = "";
                             if (!empty(trim($row["answer2"]))) {
                                 $answer2 = (strtolower($row["word"]) == strtolower($row["answer2"]))
-                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer2"]) . "</div>"
-                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer2"]) . "</div>";
+                                    ? "<div class='d-flex justify-content-center align-items-center bg-success rounded 
+                                    text-light p-1 text-center'>" . $correctIcon . "" . strtolower($row["answer2"]) . "</div>"
+                                    : "<div class='bg-danger rounded text-light d-flex justify-content-center align-items-center 
+                                    p-1 text-center'>" . $wrongIcon . "" . strtolower($row["answer2"]) . "</div>";
                             }
                             
                             $answer3 = "";
                             if (!empty(trim($row["answer3"]))) {
                                 $answer3 = (strtolower($row["word"]) == strtolower($row["answer3"]))
-                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer3"]) . "</div>"
-                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer3"]) . "</div>";
+                                    ? "<div class='d-flex justify-content-center align-items-center bg-success rounded 
+                                    text-light p-1 text-center'>" . $correctIcon . "" . strtolower($row["answer3"]) . "</div>"
+                                    : "<div class='bg-danger rounded text-light d-flex justify-content-center align-items-center 
+                                    p-1 text-center'>" . $wrongIcon . "" . strtolower($row["answer3"]) . "</div>";
                             }
 
                             echo "
