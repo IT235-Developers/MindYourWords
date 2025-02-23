@@ -41,6 +41,7 @@
                     $row = $resCategoryLevelName->fetch_assoc();
 
                     echo "<h2 class='fs-3 questions_completed_header text-center'>" . $row['categoryName'] . " - " . 
+                      
                     $row['levelName'] . "</h2>";
 
                     if($resQuestions->num_rows > 0){
