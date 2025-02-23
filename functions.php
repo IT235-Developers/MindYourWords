@@ -171,4 +171,79 @@ function getLevelHistoryID($con, $userID, $levelID){
 
 }
 
+function getUserStats($con, $userID){
+    $sqlGetUserStats = "SELECT * FROM user_stats WHERE userID = '$userID'";
+
+    $resGetUserStats = $con->query($sqlGetUserStats);
+
+    if($resGetUserStats){
+        return $resGetUserStats;
+    }
+
+    else{
+        return false;
+    }
+}
+
+function getAverageScore($con, $userID){
+    $sqlGetAverageScore = "SELECT AVG(score) AS average_score FROM level_history WHERE userID = '$userID'";
+    
+    $resGetAverageScore = $con->query($sqlGetAverageScore);
+
+    if($resGetAverageScore){
+        return $resGetAverageScore;
+    }
+
+    else{
+        return false;
+    }
+}
+
+function getHighestScore($con, $userID){
+    $sqlGetHighestScore = "SELECT MAX(score) AS highest_score FROM level_history WHERE userID = '$userID'";
+
+    $resGetHighestScore = $con->query($sqlGetHighestScore);
+
+    if($resGetHighestScore){
+        return $resGetHighestScore;
+    }
+
+    else{
+        return false;
+    }
+}
+
+function getTotalGamesPlayed($con, $userID){
+    $sqlGetTotalGamesPlayed = "SELECT COUNT(*) AS total_games_played FROM level_history WHERE userID = '$userID'";
+
+    $resGetTotalGamesPlayed = $con->query($sqlGetTotalGamesPlayed);
+
+    if($resGetTotalGamesPlayed){
+        return $resGetTotalGamesPlayed;
+    }
+
+    else{
+        return false;
+    }
+}
+
+function getWinningRate($con, $userID){
+    $sqlGetWinningRate = "SELECT lh.userID, COUNT(a.answerID) AS total_questions, SUM(a.points) AS total_points,
+        (SUM(a.points) / (COUNT(a.answerID) * 3)) * 100 AS winning_rate_percentage FROM answer a
+        JOIN score_check sc ON a.scoreCheckID = sc.scoreCheckID
+        JOIN level_history lh ON sc.levelHistoryID = lh.levelHistoryID
+        WHERE lh.userID = '$userID'
+        GROUP BY lh.userID;";
+
+    $resGetWinningRate = $con->query($sqlGetWinningRate);
+
+    if($resGetWinningRate){
+        return $resGetWinningRate;
+    }
+
+    else{
+        return false;
+    }
+}
+
 ?>
