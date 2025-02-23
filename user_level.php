@@ -149,6 +149,8 @@
             const wrongSound = new Audio("resources/audios/wrong_audio.mp3");
             const questionCompletedSound = new Audio("resources/audios/question_completed.wav");
 
+            let attemptsArray = [];
+
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
             }
