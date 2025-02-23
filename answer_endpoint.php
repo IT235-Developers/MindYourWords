@@ -10,8 +10,12 @@ $getScoreCheckID = "SELECT scoreCheckID FROM score_check ORDER BY scoreCheckID D
 
 $restgetScoreCheckID = $con->query($getScoreCheckID)->fetch_assoc()['scoreCheckID'];
 
-$sqlInsertAnswer = "INSERT INTO answer(scoreCheckID, answer, points) 
-VALUES('$restgetScoreCheckID', '$answer', '$points')";
+$answer1 = isset($attempts[0]) ? $con->real_escape_string($attempts[0]) : '';
+$answer2 = isset($attempts[1]) ? $con->real_escape_string($attempts[1]) : '';
+$answer3 = isset($attempts[2]) ? $con->real_escape_string($attempts[2]) : '';
+
+$sqlInsertAnswer = "INSERT INTO answer(scoreCheckID, answer1, answer2, answer3, points) 
+VALUES('$restgetScoreCheckID', '$answer1', '$answer2', '$answer3', '$points')";
 
 $resInsertAnswer = $con->query($sqlInsertAnswer);
 
