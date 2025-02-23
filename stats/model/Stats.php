@@ -42,6 +42,81 @@ class Stats {
             }
         }
     }
+
+    public function insertStats($userID, $levelID, $results) {
+        $levelHistoryID = $this->insertLevelHistory($userID, $levelID);
+        $scoreCheckID = null;
+    
+        if (!$levelHistoryID) {
+            echo "Failed to insert LevelHistory.";
+            return;
+        }
+    
+        // Iterate over the results array and insert each word and score into the ScoreCheck table
+        foreach ($results as $result) {
+            $word = $result['question'];
+            $score = $result['points'];
+            $scoreCheckID = $this->insertScoreCheck($levelHistoryID, $word, $score);
+            
+            if (!$scoreCheckID) {
+            echo "Failed to insert ScoreCheck for word: $word.";
+            continue;
+            }
+
+            if (isset($result['answers'])) {
+                foreach ($result['answers'] as $answer) {
+                    $this->insertAnswer($scoreCheckID, $answer);
+                }
+            }
+        }
+    }
+
+    private function insertLevelHistory($userID, $levelID) {
+        $sql = "INSERT INTO LevelHistory (userID, levelID) VALUES (:userID, :levelID)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindParam(':levelID', $levelID, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            $levelHistoryID = $this->pdo->lastInsertId();
+            return $levelHistoryID;
+        } catch (PDOException $e) {
+            echo "Error inserting stats: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    private function insertScoreCheck($levelHistoryID, $word, $score) {
+        $sql = "INSERT INTO ScoreCheck (levelHistoryID, word, score) VALUES (:levelHistoryID, :word, :score)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':levelHistoryID', $levelHistoryID, PDO::PARAM_INT);
+        $stmt->bindParam(':word', $word, PDO::PARAM_STR);
+        $stmt->bindParam(':score', $score, PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            echo "Error inserting score check: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    private function insertAnswer($scoreCheckID, $answer) {
+        $sql = "INSERT INTO Answer (scoreCheckID, answer) VALUES (:scoreCheckID, :answer)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':scoreCheckID', $scoreCheckID, PDO::PARAM_INT);
+        $stmt->bindParam(':answer', $answer, PDO::PARAM_STR);
+
+        try {
+            $stmt->execute();
+            return $this->pdo->lastInsertId();
+        } catch (PDOException $e) {
+            echo "Error inserting answer: " . $e->getMessage();
+            return false;
+        }
+    }
 }
 
 ?>
