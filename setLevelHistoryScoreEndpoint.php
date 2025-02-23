@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("connection.php");
+include("functions.php");
 
 $userID = $_SESSION['user']['userID'];
 
