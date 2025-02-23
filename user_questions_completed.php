@@ -40,7 +40,7 @@
                 if ($resCategoryLevelName->num_rows > 0) {
                     $row = $resCategoryLevelName->fetch_assoc();
 
-                    echo "<h2 class='fs-3 pt-3 questions_completed_header text-center'>" . $row['categoryName'] . " - " . 
+                    echo "<h2 class='fs-3 questions_completed_header text-center'>" . $row['categoryName'] . " - " . 
                     $row['levelName'] . "</h2>";
 
                     if($resQuestions->num_rows > 0){
@@ -62,7 +62,7 @@
                             echo "Something went wrong!";
                         }
 
-                        echo "<h2 class='fw-bold fs-3 questions_completed_header'>". $accuracy ."% Accuracy</h2>";
+                        echo "<h2 class='fw-bold mt-3 mb-5 fs-3 questions_completed_header' style='text-align: center;'>". $accuracy ."% Accuracy</h2>";
                     }
 
                 }
@@ -131,7 +131,7 @@
                                         <div class='mt-1'>".$answer2."</div>
                                         <div class='mt-1'>".$answer3."</div>
                                     </td>
-                                    <td class='text-center'>". $row['points'] ."</td>
+                                    <td class='text-center'>". ($row['points'] > 0 ? "<span class='text-success'>".$row['points']." pts</span>" : "<span class='text-danger'>0 pts</span>") ."</td>
                                 </tr>
                             ";
 
