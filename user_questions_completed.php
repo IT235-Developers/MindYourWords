@@ -91,8 +91,8 @@
                     $wordNumber = 1;
 
                     if($resGetAnswerWord->num_rows > 0){
-                        $correctIcon = "<span class='text-white'>&#x2714</span>";
-                        $wrongIcon = "<span class='text-white'>&#x2718</span>";
+                        $correctIcon = "<i class='bi bi-check text-white fs-3'></i>";
+                        $wrongIcon = "<i class='bi bi-x text-white fs-3'></i>";
 
                         while($row = $resGetAnswerWord->fetch_assoc()){
                             $answer1 = "";
