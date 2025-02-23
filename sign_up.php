@@ -16,7 +16,7 @@ require_once __DIR__ . '/components/flash_message.php';
   <body>
     <div class="container-fluid main_container d-flex justify-content-evenly flex-xxl-row flex-column">
       <div class="col">
-        <img class="secondary_logo_auth" src="images\myw-primary-logo.svg">
+        <img class="secondary_logo_auth p-3" src="images\myw-primary-logo.svg">
       </div>
       <div class="col-xxl-6"> 
         <h3 class="mb-4">Create an Account!</h3>
