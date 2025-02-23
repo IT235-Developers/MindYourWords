@@ -82,27 +82,50 @@
                 <?php
                     include("connection.php");
 
-                    $sqlGetAnswerWord = "SELECT answer, points, word FROM answer AS a INNER JOIN score_check AS sc
-                    ON a.scoreCheckID = sc.scoreCheckID AND sc.levelHistoryID = '$levelHistoryID';";
+                    $sqlGetAnswerWord = "SELECT answer1, answer2, answer3, points, word FROM answer AS a 
+                    INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID AND 
+                    sc.levelHistoryID = '$levelHistoryID';";
 
                     $resGetAnswerWord = $con->query($sqlGetAnswerWord);
                     $wordNumber = 1;
 
                     if($resGetAnswerWord->num_rows > 0){
-                        while($row = $resGetAnswerWord->fetch_assoc()){
-                            $icon = (strtolower($row["word"]) == strtolower($row["answer"]))
-                                ? "<span class='text-success'>&#x2714;</span>"  // Check mark (correct)
-                                : "<span class='text-danger'>&#x2718;</span>"; // Cross mark (wrong)
+                        $correctIcon = "<span class='text-white'>&#x2714</span>";
+                        $wrongIcon = "<span class='text-white'>&#x2718</span>";
 
-                            $answer = (strtolower($row["word"]) == strtolower($row["answer"]))
-                                ? "<td class='bg-success rounded text-light'>".strtolower($row["answer"])."</td>"  
-                                : "<td class='bg-danger rounded text-light'>".strtolower($row["answer"])."</td>"; 
+                        while($row = $resGetAnswerWord->fetch_assoc()){
+                            $answer1 = "";
+                            if (!empty(trim($row["answer1"]))) {
+                                $answer1 = (strtolower($row["word"]) == strtolower($row["answer1"]))
+                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer1"]) . 
+                                    "" . $correctIcon . "</div>"
+                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer1"]) . 
+                                    "". $wrongIcon ."</div>";
+                            }
+                            
+                            $answer2 = "";
+                            if (!empty(trim($row["answer2"]))) {
+                                $answer2 = (strtolower($row["word"]) == strtolower($row["answer2"]))
+                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer2"]) . "</div>"
+                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer2"]) . "</div>";
+                            }
+                            
+                            $answer3 = "";
+                            if (!empty(trim($row["answer3"]))) {
+                                $answer3 = (strtolower($row["word"]) == strtolower($row["answer3"]))
+                                    ? "<div class='bg-success rounded text-light p-2 text-center'>" . strtolower($row["answer3"]) . "</div>"
+                                    : "<div class='bg-danger rounded text-light p-2 text-center'>" . strtolower($row["answer3"]) . "</div>";
+                            }
 
                             echo "
                                 <tr>
                                     <td>" .$wordNumber. "</td>
                                     <td>". strtolower($row["word"]) ."</td>
-                                     ".$answer."
+                                    <td>
+                                        <div>".$answer1."</div>
+                                        <div class='mt-1'>".$answer2."</div>
+                                        <div class='mt-1'>".$answer3."</div>
+                                    </td>
                                     <td>". $row['points'] ."</td>
                                 </tr>
                             ";
