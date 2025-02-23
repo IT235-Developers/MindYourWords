@@ -2,13 +2,17 @@
     session_start();
     include("connection.php");
 
-    if(isset($_POST['btn_cancel'])){
+    if(isset($_POST['btn_cancel']) || isset($_POST['exit_window'])){
         $levelHistoryID = $_SESSION['levelHistoryID'];
 
         $sqlDeleteLevelHistory = "DELETE FROM level_history WHERE levelHistoryID = '$levelHistoryID'";
 
         if(!$con->query($sqlDeleteLevelHistory)){
             echo "Level history record deletion failed";
+        }
+
+        if(isset($_POST['exit_window'])){
+            exit;
         }
     }
 
