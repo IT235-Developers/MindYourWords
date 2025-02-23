@@ -14,7 +14,11 @@
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <?php
                 include("connection.php");
+                include("functions.php");
+                include("components/flash_message.php");
                 session_start();
+
+                $userID = $_SESSION['user']['userID'];
 
                 if (isset($_POST['txt_levelHID']) && isset($_POST['txt_categoryHID'])) {
                     $_SESSION['levelID'] = $_POST['txt_levelHID'];
@@ -28,6 +32,42 @@
                     echo "<p class='text-danger'>Level ID or Category ID is missing.</p>";
                     header("Location: admin_category.php");
                     exit();
+                }
+
+                
+                $sqlCheckLevelID = "SELECT levelID FROM level_history WHERE levelID = '$levelID' AND userID = '$userID'";
+                $sqlCheckLevelQuestions = "SELECT * FROM questions WHERE levelID = '$levelID'";
+
+                $resCheckLevelID = $con->query($sqlCheckLevelID);
+                $resCheckLevelQuestions = $con->query($sqlCheckLevelQuestions);
+
+                //check if the levelID already exists in the level_history table
+                if($resCheckLevelID->num_rows > 0){
+                    getLevelHistoryID($con, $userID, $levelID);
+                    header("Location: user_questions_completed.php");
+                    exit;
+                }
+
+                //check if the current level contain questions
+                else if($resCheckLevelQuestions->num_rows == 0){
+                    setFlashMessage("danger", "No questions available");
+                    header("Location: user_category.php");
+                    exit;
+                }
+
+            
+                //Whenever the user enters a level, create a history for that
+                $sqlInsertLevelHistory = "INSERT INTO level_history(userID, levelID, score) 
+                VALUES('$userID','$levelID', 0)";
+
+                $resInsertLevelHistory = $con->query($sqlInsertLevelHistory);
+
+                if($resInsertLevelHistory){
+                    getLevelHistoryID($con, $userID, $levelID);
+                }
+
+                else{
+                    echo "failed!";
                 }
 
                 $sqlCategoryLevelName = "SELECT c.categoryName, l.levelName FROM category c
@@ -83,8 +123,8 @@
                 <p id="feedback" class="mt-1"></p>
             </div>
 
-            <form method="POST">
-                <a class="btn delete mt-3 float-start" href="user_category.php" id="btn_cancel">Cancel</a>
+            <form action="user_category.php" method="POST">
+                <button type="submit" class="btn delete mt-3 float-start" name="btn_cancel" id="btn_cancel">Cancel</a>
             </form>
         </div>
 
@@ -108,6 +148,8 @@
             const correctSound = new Audio("resources/audios/correct_audio.mp3");
             const wrongSound = new Audio("resources/audios/wrong_audio.mp3");
             const questionCompletedSound = new Audio("resources/audios/question_completed.wav");
+
+            let attemptsArray = [];
 
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
@@ -153,14 +195,55 @@
                     sentenceButton.setAttribute("data-text", questions[index].sampleSentence);
                     userInputField.value = ""; // Clear input field
                     feedback.innerText = ""; // Clear feedback
+
+                    const payload = {
+                        word: questions[index].word,
+                    };
+
+                    // Send the current word to score_check_endpoint.php
+                    fetch('score_check_endpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log('score_check record insertion successfull', result);
+                    })
+                    .catch(error => console.error('score_check record insertion failed:', error));
+
+
                     textToSpeech(questions[index].word); // Read the word
                         setTimeout(() => {
                             textToSpeech(questions[index].sampleSentence); // Read the sample sentence
                         }, 1000);
 
                 } else {
+                    const levelID = <?php echo json_encode($levelID); ?>;
+
+                    const payload = {
+                        levelID: levelID,
+                        score: score,
+                    };
+
+                    // Send the current levelID and score to setLevelHistoryScoreEndpoint.php
+                    fetch('setLevelHistoryScoreEndpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log('Level history score updated', result);
+                        window.location.href = 'user_questions_completed.php';
+                    })
+                    .catch(error => console.error('Error updating level history score:', error));
+                    
                     questionCompletedSound.play();
-                    question_container.innerHTML = `<h4>All questions completed!</h4><p>Your total score is: <strong>${score}</strong></p>`;
                 }
             }
 
@@ -191,6 +274,17 @@
                 const userInput = userInputField.value.trim().toLowerCase();
                 const correctWord = questions[currentQuestionIndex].word.toLowerCase();
 
+                // Check if input is empty
+                if (userInput === "") {
+                    feedback.innerHTML = `<span class='text-danger'>Please enter a word before submitting.</span>`;
+                    return; // Stop further processing if input is empty
+                }
+
+                // Record the attempt
+                attemptsArray.push(userInput === "" ? "(blank)" : userInput);
+
+                console.log(attemptsArray);
+
                 userInputField.classList.remove("correct", "incorrect");
 
                 //reset back the wrongSound
@@ -206,11 +300,28 @@
                     feedback.innerHTML = `<span class='text-success'>Nicely done! 🎉 You earned ${points} point(s).</span>`;
                     userInputField.classList.add("correct");
 
+                    // Send the answer to answer_endpoint.php
+                    const payload = { 
+                        attemptsArray: attemptsArray,
+                        points: points
+                    };
+                    fetch('answer_endpoint.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => response.text())
+                    .then(result => console.log('correct answer recorded:', result))
+                    .catch(error => console.error('error recording correct answer:', error));
+
                     // Disable the submit button whenever you get the correct answer
                     submitButton.disabled = true;
 
                     currentQuestionIndex++;
                     attempts = 0; // Reset attempts
+                    attemptsArray = []; // Clear attempts for the next question
 
                     setTimeout(() => {
                         loadQuestion(currentQuestionIndex);
@@ -230,8 +341,25 @@
                         currentQuestionIndex++;
                         attempts = 0; // Reset attempts
 
+                        // Send the answer to answer_endpoint.php
+                        const payload = { 
+                            attemptsArray: attemptsArray,
+                            points: 0
+                        };
+                        fetch('answer_endpoint.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                        .then(response => response.text())
+                        .then(result => console.log('wrong nswer recorded:', result))
+                        .catch(error => console.error('error recording wrong answer:', error));
+
                         // Disable the submit button whenever you get the wrong answer
                         submitButton.disabled = true;
+                        attemptsArray = []; // Clear attempts for the next question
 
                         setTimeout(() => {
                             loadQuestion(currentQuestionIndex);

@@ -56,6 +56,11 @@ body{
 	text-align: center;
 	color: #004873;
 }
+
+.questions_completed_header{
+	color: #004873;
+}
+
 .btn_add{
 	display: flex;
 	margin-left: 10px;

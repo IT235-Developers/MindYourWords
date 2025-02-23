@@ -2,6 +2,16 @@
     session_start();
     include("connection.php");
 
+    if(isset($_POST['btn_cancel'])){
+        $levelHistoryID = $_SESSION['levelHistoryID'];
+
+        $sqlDeleteLevelHistory = "DELETE FROM level_history WHERE levelHistoryID = '$levelHistoryID'";
+
+        if(!$con->query($sqlDeleteLevelHistory)){
+            echo "Level history record deletion failed";
+        }
+    }
+
     // Store categoryID in session when form is submitted
     if (isset($_POST['txt_categoryHID'])) {
         $_SESSION['categoryID'] = $_POST['txt_categoryHID'];
@@ -48,6 +58,8 @@
 
             <?php
             include("connection.php");
+            include("components/flash_message.php");
+
             $sqlCategoryName = "SELECT * FROM category WHERE categoryID = $categoryHID";
             $resCategoryName = $con->query($sqlCategoryName);
 
@@ -55,7 +67,9 @@
                 $row = $resCategoryName->fetch_assoc();
             ?>
                 <h3 class="category_header"><?= $row['categoryName'] ?></h3>
-            <?php } ?>
+            <?php } 
+                displayFlashMessage();
+            ?>
 
             <div class="row">
                 <?php
@@ -64,19 +78,17 @@
 
                 if ($resDisplayLevel->num_rows > 0) {
                     while ($row = $resDisplayLevel->fetch_assoc()) {
-                        if (isQuestionsAvailable($con, $row)) {
                 ?>
-                            <div class="col-12 col-md-6 g-3">
-                                <form action="user_level.php" method="POST">
-                                    <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
-                                    <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
-                                    <button type="submit" class="category_level_container rounded text-center bg-white">
-                                        <p><?= $row['levelName'] ?></p>
-                                    </button>
-                                </form>
-                            </div>
+                        <div class="col-12 col-md-6 g-3">
+                            <form action="user_level.php" method="POST">
+                                <input type="hidden" name="txt_categoryHID" value="<?= $row['categoryID'] ?>">
+                                <input type="hidden" name="txt_levelHID" value="<?= $row['levelID'] ?>">
+                                <button type="submit" class="category_level_container rounded text-center bg-white">
+                                    <p><?= $row['levelName'] ?></p>
+                                </button>
+                            </form>
+                        </div>
                 <?php
-                        }
                     }
                 }
                 ?>
