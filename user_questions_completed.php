@@ -40,7 +40,7 @@
                 if ($resCategoryLevelName->num_rows > 0) {
                     $row = $resCategoryLevelName->fetch_assoc();
 
-                    echo "<h2 class='fs-3 pt-4 questions_completed_header'>" . $row['categoryName'] . " - " . 
+                    echo "<h2 class='fs-3 pt-3 questions_completed_header text-center'>" . $row['categoryName'] . " - " . 
                     $row['levelName'] . "</h2>";
 
                     if($resQuestions->num_rows > 0){
@@ -55,7 +55,7 @@
 
                         if($resGetCurrentLevelScore->num_rows > 0){
                             $score = (int) $resGetCurrentLevelScore->fetch_assoc()['score'];
-                            $accuracy = round($score / $maximumPoints * 100, 2);
+                            $accuracy = round($score / $maximumPoints * 100);
                         }
 
                         else{
