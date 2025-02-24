@@ -33,8 +33,16 @@ function isLevelsAvailable($con, $row) {
         <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
     </head>
     <body>
-        <div class="container-fluid main_container">
+        <div class="container-fluid main_container" style="padding-top: 30px;">
             <div class="row mb-3">
+                <div>
+                    <form action="auth/logout.php" method="POST">
+                        <button type="submit" class="icon_button btn-danger mt-3 float-end"><img src="resources/logout_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Logout icon"></button>
+                    </form>
+                    <form action="user_statistics.php" method="POST">
+                        <button type="submit" class="icon_button btn-success me-2 mt-3 float-end"><img src="resources/monitoring_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt=""></button>
+                    </form>
+                </div>
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <h3 class="welcome_header text-center mb-4">
                     <?php 
@@ -69,12 +77,7 @@ function isLevelsAvailable($con, $row) {
                     ?>
                 </div>
             </div>
-            <form action="auth/logout.php" method="POST">
-                <button type="submit" class="btn delete mt-3 float-end">Logout</button>
-            </form>
-            <form action="user_statistics.php" method="POST">
-                <button type="submit" class="btn btn-primary me-2 mt-3 float-end">Stats</button>
-            </form>
+
         </div>
     </body>
 </html>
