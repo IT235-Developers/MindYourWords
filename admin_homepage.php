@@ -53,6 +53,25 @@ if (isset($_POST['btn_addCategory'])) {
         <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
     </head>
     <body>
+        <div class="modal" id="logout_modal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius: 10px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Logout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="auth/logout.php" method="POST">
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="overlay"></div>
         <div class="container-fluid main_container">
@@ -109,9 +128,11 @@ if (isset($_POST['btn_addCategory'])) {
                     ?>
                 </div>
             </div>
-            <form action="auth/logout.php" method="POST">
-                <button type="submit" class="btn delete mt-3 float-end">Logout</button>
-            </form>
+            <div class="d-flex flex-row mt-3 justify-content-end">
+                <button type="submit" class="icon_button mt-3" data-bs-toggle="modal" style="background-color: #C33131" data-bs-target="#logout_modal">
+                    <img src="resources/logout_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Logout icon">
+                </button>
+            </div>
         </div>
 
         <script src="js/shared-script.js"></script>
