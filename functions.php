@@ -321,4 +321,23 @@ function updateUserStats($con, $userID){
     }
 }
 
+function removeStats($con, $userID){
+    $sqlGetLevelHistory = "SELECT * FROM level_history WHERE userID = '$userID'";
+
+    $resGetLevelHistory = $con->query($sqlGetLevelHistory);
+
+    if($resGetLevelHistory){
+        if($resGetLevelHistory->num_rows == 0){
+            $sqlRemoveUserStats = "DELETE FROM user_stats WHERE userID = '$userID'";
+            
+            //handle error later
+            $con->query($sqlRemoveUserStats);
+        }
+    }
+
+    else{
+        echo "Query for getting level history failed to execute";
+    }
+}
+
 ?>
