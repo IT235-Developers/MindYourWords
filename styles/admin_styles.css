@@ -12,11 +12,13 @@ body{
 .bg-img{
 	background-image: url("../images/myw-pattern.svg");
 	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .bg-img-gif{
 	background-image: url("../images/myw_moving_background.gif");
 	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 ::-webkit-scrollbar {
