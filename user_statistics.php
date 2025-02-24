@@ -1,8 +1,13 @@
 <?php
     session_start();
     include("connection.php");
+    include("functions.php");
 
     $userID = $_SESSION['user']['userID'];
+
+    //If this method detects a user containing 0 level_history record, delete its stats
+    removeStats($con, $userID);
+
     $username = $_SESSION['user']['username'];
 
     $sqlGetUserStats = "SELECT averageScore, highestScore, totalGamesPlayed, winningRate
