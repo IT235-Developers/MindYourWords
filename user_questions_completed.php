@@ -15,7 +15,7 @@
         <div class="row">
             <img src="images/myw-secondary-logo.svg" class="secondary_logo">
 
-            <h1 class="fs-1 text-center text-success">Congratulations!</h1>
+            <h1 class="fs-1 text-center text-success">All questions completed!</h1>
 
             <?php
                 session_start();
