@@ -20,7 +20,10 @@
         }
 
         else{
-            echo "No user stats record found";
+            $averageScore = 0;
+            $highestScore =  0;
+            $totalGamesPlayed = 0;
+            $winningRate = 0;
         }
     }
 
@@ -72,6 +75,7 @@
             </div>
 
         </div>
+        <a class="btn back float-end mt-3 me-2" href="user_homepage.php">Back</a>
     </div>
     
 </body>
