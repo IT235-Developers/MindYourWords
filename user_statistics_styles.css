@@ -23,6 +23,19 @@ body{
 	max-height: 80%;
 }
 
+.back{
+	background-color: #007BFF;
+	color: #fff;
+}
+.back:hover{
+	background-color: #0069D9;
+	color: #fff;
+}
+.back:hover{
+	background-color: #0069D9;
+	color: #fff;
+}
+
 .custom-text-color{
 	color: #004873;
 }
