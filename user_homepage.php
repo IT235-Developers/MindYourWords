@@ -1,6 +1,12 @@
 <?php
 session_start();
 include("connection.php");
+include("functions.php");
+
+$userID = $_SESSION['user']['userID'];
+
+//If this method detects a user containing 0 level_history record, delete its stats
+removeStats($con, $userID);
 
 function isLevelsAvailable($con, $row) {
     $categoryID = $row['categoryID'];
@@ -65,6 +71,9 @@ function isLevelsAvailable($con, $row) {
             </div>
             <form action="auth/logout.php" method="POST">
                 <button type="submit" class="btn delete mt-3 float-end">Logout</button>
+            </form>
+            <form action="user_statistics.php" method="POST">
+                <button type="submit" class="btn btn-primary me-2 mt-3 float-end">Stats</button>
             </form>
         </div>
     </body>
