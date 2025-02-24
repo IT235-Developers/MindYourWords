@@ -151,13 +151,15 @@
 
             let attemptsArray = [];
 
-            window.addEventListener('beforeunload', function (event) {
+            window.addEventListener('beforeunload', beforeUnloadHandler);
+
+            function beforeUnloadHandler(event) {
                 let formData = new FormData();
                 formData.append('exit_window', '1');
 
                 // Use navigator.sendBeacon to send the request to user_category.php
                 navigator.sendBeacon('user_category.php', formData);
-            });
+            }
 
             function cancelOngoingSpeech(){
                 window.speechSynthesis.cancel();
@@ -247,6 +249,7 @@
                     .then(response => response.text())
                     .then(result => {
                         console.log('Level history score updated', result);
+                        window.removeEventListener('beforeunload', beforeUnloadHandler);
                         window.location.href = 'user_questions_completed.php';
                     })
                     .catch(error => console.error('Error updating level history score:', error));
