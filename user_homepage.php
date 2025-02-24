@@ -91,10 +91,11 @@ function isLevelsAvailable($con, $row) {
                     <form action="user_statistics.php" method="POST">
                         <button type="submit" class="icon_button me-2 mt-3" style="background-color: #46A33A"><img src="resources/monitoring_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt=""></button>
                     </form>
-                    <button type="submit" class="icon_button mt-3" data-bs-toggle="modal" style="background-color: #C33131" data-bs-target="#logout_modal"><img src="resources/logout_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Logout icon"></button>
+                    <button type="submit" class="icon_button mt-3" data-bs-toggle="modal" style="background-color: #C33131" data-bs-target="#logout_modal">
+                        <img src="resources/logout_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Logout icon">
+                    </button>
                 </div>
             </div>
-
         </div>
     </body>
 </html>
