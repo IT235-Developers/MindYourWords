@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="bg-img">
     
     <div class="container-fluid main_container">
         <div class="row">
