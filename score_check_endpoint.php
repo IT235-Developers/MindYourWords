@@ -19,6 +19,4 @@ $sqlInsertScoreCheck = "INSERT INTO score_check(levelHistoryID, word)
 
 $resInsertScoreCheck = $con->query($sqlInsertScoreCheck);
 
-$result = $con->query($query);
-
 ?>
