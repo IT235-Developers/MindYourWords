@@ -13,7 +13,7 @@ require_once __DIR__ . '/components/flash_message.php';
     <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
       <title>Sign Up Page</title>
   </head>
-  <body>
+  <body class="bg-img-gif">
     <div class="container-fluid main_container d-flex justify-content-evenly flex-xxl-row flex-column">
       <div class="col">
         <img class="secondary_logo_auth p-3" src="images\myw-primary-logo.svg">

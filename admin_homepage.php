@@ -72,7 +72,7 @@ if (isset($_POST['btn_addCategory'])) {
                 </div>
             </div>
         </div>
-
+      
         <div id="overlay"></div>
         <div class="container-fluid main_container">
             <div class="row">

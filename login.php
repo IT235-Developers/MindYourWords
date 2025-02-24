@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	    <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
 		<title>Log in Page</title>
 	</head>
-	<body>
+	<body class="bg-img-gif">
 		<div class="container-fluid main_container d-flex justify-content-evenly flex-xxl-row flex-column">
 			<div class="col">
 				<img class="secondary_logo_auth p-3" src="images\myw-primary-logo.svg">
