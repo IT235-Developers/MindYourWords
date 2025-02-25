@@ -1,8 +1,15 @@
 <?php
-    session_start();
+    require_once 'auth/controller/AuthController.php';
     include("auth/auth.php");
     include("connection.php");
     include("functions.php");
+
+    $auth = new AuthController($pdo);
+    if ($auth->checkIfAdmin()) {
+        setFlashMessage("danger", "Admins are not allowed to access user-only pages.");
+        header("Location: admin_homepage.php");
+        exit();
+    }
 
     $userID = $_SESSION['user']['userID'];
 
