@@ -13,11 +13,10 @@
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <?php
+                session_start();
                 include("auth/auth.php");
                 include("connection.php");
                 include("functions.php");
-                include("components/flash_message.php");
-                session_start();
 
                 $userID = $_SESSION['user']['userID'];
 
