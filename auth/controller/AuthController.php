@@ -54,6 +54,13 @@ class AuthController {
         } 
     }
 
+    public function checkIfLoggedIn() {
+        if (isset($_SESSION["user"])) {
+            return true;
+        }
+        return false;
+    }
+
     public function setUserSession() {
         $_SESSION['user'] = $this->user;
     }
