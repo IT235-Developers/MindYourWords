@@ -5,7 +5,7 @@
         session_start();
     }
     if (!isset($_SESSION['user'])) {
-        setFlashMessage("danger", "Authentication Required: Kindly log in to access this content.");
+        setFlashMessage("danger", "Authentication required: Kindly log in to access this content.");
         header("Location: login.php");
         exit();
     }

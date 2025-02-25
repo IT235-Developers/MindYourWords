@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../components/flash_message.php';
 
 class AuthController {
     private $userModel;
+    private $user;
 
     public function __construct($pdo) {
         $this->userModel = new User($pdo);
@@ -22,16 +23,15 @@ class AuthController {
     }
 
     public function login($email, $password) {
-        $user = $this->userModel->login($email, $password);
-        if ($user) {
-            $_SESSION['user'] = $user;
-            $role = $user["roleID"];
-            
-            if ($role === 1) {
+        $this->user = $this->userModel->login($email, $password);
+        if ($this->user) {
+            $this->setUserSession();
+
+            if ($this->checkIfAdmin()) {
                 header("Location: admin_homepage.php");
-            } else if ($role === 2) {
+            } else {
                 header("Location: user_homepage.php");
-            } 
+            }
 
         } else {
             setFlashMessage("danger", "Invalid email or password. Please try again.");
@@ -42,6 +42,20 @@ class AuthController {
         unset($_SESSION['user']);
         setFlashMessage("success", "You have been logged out successfully.");
         header("Location: ../login.php");
+    }
+    
+    public function checkIfAdmin() {
+        $role = $_SESSION['user']["roleID"];
+        
+        if ($role === 1) {
+            return true;
+        } else if ($role === 2) {
+            return false;
+        } 
+    }
+
+    public function setUserSession() {
+        $_SESSION['user'] = $this->user;
     }
 }
 ?>
