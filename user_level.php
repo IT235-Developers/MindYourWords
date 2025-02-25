@@ -116,7 +116,7 @@
                 <p id="definition"></p>
 
                 <div class="d-flex align-items-center mt-3">
-                    <input type="text" id="userInput" class="form-control me-2" placeholder="Spell the word here">
+                    <input autocomplete="off" type="text" id="userInput" class="form-control me-2" placeholder="Spell the word here">
                     <button id="submitButton" class="btn btn-primary">Submit</button>
                 </div>
 
