@@ -25,9 +25,9 @@ function displayFlashMessage() {
 if (isset($_POST['btn_addQuestion'])) {
     $levelID = $_POST['txt_levelHID'];
 
-    $word = mysqli_real_escape_string($con, $_POST['txt_addWord']);
-    $sampleSentence = mysqli_real_escape_string($con, $_POST['txt_addExample']);
-    $definition = mysqli_real_escape_string($con, $_POST['txt_addDescription']);
+    $word = mysqli_real_escape_string($con, trim($_POST['txt_addWord']));
+    $sampleSentence = mysqli_real_escape_string($con, trim($_POST['txt_addExample']));
+    $definition = mysqli_real_escape_string($con, trim($_POST['txt_addDescription']));
 
     $sqlSelect = "SELECT * FROM questions WHERE levelID = $levelID AND word = '$word' AND sampleSentence = '$sampleSentence' AND definition = '$definition'";
     $resSelect = $con->query($sqlSelect);

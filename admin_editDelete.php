@@ -113,9 +113,9 @@ function displayFlashMessage() {
 <?php
 if (isset($_POST['btn_updateWord'])) {
     $questionID = $_POST['txt_editQuestionID'];
-    $word = mysqli_real_escape_string($con, $_POST['txt_editWord']);
-    $sampleSentence = mysqli_real_escape_string($con, $_POST['txt_editExample']);
-    $definition = mysqli_real_escape_string($con, $_POST['txt_editDescription']);
+    $word = mysqli_real_escape_string($con, trim($_POST['txt_editWord']));
+    $sampleSentence = mysqli_real_escape_string($con, trim($_POST['txt_editExample']));
+    $definition = mysqli_real_escape_string($con, trim($_POST['txt_editDescription']));
   
     $sqlUpdate = "UPDATE questions SET word = '$word', sampleSentence = '$sampleSentence', definition = '$definition' WHERE questionID = '$questionID'";
 
