@@ -54,7 +54,7 @@ class AuthController {
         } 
     }
 
-    public function checkIfLoggedIn() {
+    public function isLoggedIn() {
         if (isset($_SESSION["user"])) {
             return true;
         }

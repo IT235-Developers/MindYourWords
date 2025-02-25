@@ -2,9 +2,10 @@
 require_once 'auth/controller/AuthController.php';
 require_once __DIR__ . '/components/flash_message.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $auth = new AuthController($pdo);
-    $auth->login($_POST['txt_email'], $_POST['txt_password']);
+$auth = new AuthController($pdo);
+
+if (isset($_POST['btn_login'])) {
+	$auth->login($_POST['txt_email'], $_POST['txt_password']);
 }
 ?>
 
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						</div>
 					</div>
 
-					<input type="submit" id="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
+					<input type="submit" id="btn_login" name="btn_login" class="btn w-100 btn-primary mt-2 p-2" value="Login">
 
 					<div class="form-group">
 						<p class="mt-3 text-center">Don't have an account? <a href="sign_up.php">Register Here</a></p>
