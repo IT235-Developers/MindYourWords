@@ -53,14 +53,14 @@ class AuthController {
             return false;
         } 
     }
-
+  
     public function isLoggedIn() {
         if (isset($_SESSION["user"])) {
             return true;
         }
         return false;
     }
-
+  
     public function setUserSession() {
         $_SESSION['user'] = $this->user;
     }
