@@ -1,3 +1,14 @@
+<?php
+    require_once 'auth/controller/AuthController.php';
+
+    $auth = new AuthController($pdo);
+    if ($auth->checkIfAdmin()) {
+        setFlashMessage("danger", "Admins are not allowed to access user-only pages.");
+        header("Location: admin_homepage.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,10 +24,9 @@
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <?php
+                include("auth/auth.php");
                 include("connection.php");
                 include("functions.php");
-                include("components/flash_message.php");
-                session_start();
 
                 $userID = $_SESSION['user']['userID'];
 

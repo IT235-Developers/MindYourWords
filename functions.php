@@ -1,5 +1,6 @@
 
-<?php 
+<?php
+include("auth/auth.php");
 
 function archiveCategoryIfNotExist($categoryID, $con, $con2) {
     $sqlCheckCategoryIfExist = "SELECT * FROM category WHERE categoryID = $categoryID";

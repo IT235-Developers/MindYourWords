@@ -1,25 +1,17 @@
 <?php
-session_start();
+require_once 'auth/controller/AuthController.php';
+include("auth/auth.php");
 include("connection.php");
 include("conn2.php");
 include("functions.php");
 
-// Flash message functions
-function setFlashMessage($type, $message) {
-    $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+$auth = new AuthController($pdo);
+if (!$auth->checkIfAdmin()) {
+    setFlashMessage("danger", "Users are not allowed to access admin-only pages.");
+    header("Location: user_homepage.php");
+    exit();
 }
 
-function displayFlashMessage() {
-    if (isset($_SESSION['flash'])) {
-        $type = $_SESSION['flash']['type'];
-        $message = $_SESSION['flash']['message'];
-        echo "<div class='alert alert-$type alert-dismissible fade show' role='alert'>
-                $message
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-              </div>";
-        unset($_SESSION['flash']);
-    }
-}
 ?>
 
 <!DOCTYPE html>

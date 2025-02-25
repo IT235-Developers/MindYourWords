@@ -1,3 +1,14 @@
+<?php
+    require_once 'auth/controller/AuthController.php';
+
+    $auth = new AuthController($pdo);
+    if ($auth->checkIfAdmin()) {
+        setFlashMessage("danger", "Admins are not allowed to access user-only pages.");
+        header("Location: admin_homepage.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +29,7 @@
             <h1 class="fs-1 text-center text-success">All questions completed!</h1>
 
             <?php
-                session_start();
+                include("auth/auth.php");
                 include("connection.php");
 
                 $userID = $_SESSION['user']['userID'];
