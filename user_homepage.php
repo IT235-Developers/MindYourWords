@@ -71,6 +71,9 @@ function isLevelsAvailable($con, $row) {
                     ?>
                 </h3>
 
+                <!-- Display flash message when deleting category -->
+                <?php displayFlashMessage(); ?>
+
                 <!-- Display Categories -->
                 <div class="row">
                     <?php
