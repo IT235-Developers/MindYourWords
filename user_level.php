@@ -24,7 +24,6 @@
             <div class="row">
                 <img src="images/myw-secondary-logo.svg" class="secondary_logo">
                 <?php
-                session_start();
                 include("auth/auth.php");
                 include("connection.php");
                 include("functions.php");
