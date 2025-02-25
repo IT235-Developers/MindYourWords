@@ -1,7 +1,14 @@
 <?php
-session_start(); // Start session at the top of the script
+require_once 'auth/controller/AuthController.php';
 include("auth/auth.php");
 include("connection.php");
+
+$auth = new AuthController($pdo);
+if (!$auth->checkIfAdmin()) {
+    setFlashMessage("danger", "Users are not allowed to access admin-only pages.");
+    header("Location: user_homepage.php");
+    exit();
+}
 
 if (isset($_POST['btn_addCategory'])) {
     $category = mysqli_real_escape_string($con, $_POST['txt_category']);

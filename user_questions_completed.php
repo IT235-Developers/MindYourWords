@@ -1,3 +1,14 @@
+<?php
+    require_once 'auth/controller/AuthController.php';
+
+    $auth = new AuthController($pdo);
+    if ($auth->checkIfAdmin()) {
+        setFlashMessage("danger", "Admins are not allowed to access user-only pages.");
+        header("Location: admin_homepage.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

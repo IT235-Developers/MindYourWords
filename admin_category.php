@@ -1,9 +1,16 @@
 <?php
-session_start();
+require_once 'auth/controller/AuthController.php';
 include("auth/auth.php");
 include("connection.php");
 include("conn2.php");
 include("functions.php");
+
+$auth = new AuthController($pdo);
+if (!$auth->checkIfAdmin()) {
+    setFlashMessage("danger", "Users are not allowed to access admin-only pages.");
+    header("Location: user_homepage.php");
+    exit();
+}
 
 // Store categoryID in session when form is submitted
 if (isset($_POST['txt_categoryHID'])) {
