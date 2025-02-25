@@ -4,6 +4,18 @@ require_once __DIR__ . '/components/flash_message.php';
 
 $auth = new AuthController($pdo);
 
+if ($auth->isLoggedIn()) {
+	setFlashMessage("warning", "You are already logged in.");
+
+	if ($auth->checkIfAdmin()) {
+        header("Location: admin_homepage.php");
+        exit();
+    } else {
+		header("Location: user_homepage.php");
+        exit();
+	}
+}
+
 if (isset($_POST['btn_login'])) {
 	$auth->login($_POST['txt_email'], $_POST['txt_password']);
 }
