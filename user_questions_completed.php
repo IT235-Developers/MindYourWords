@@ -19,6 +19,7 @@
 
             <?php
                 session_start();
+                include("auth/auth.php");
                 include("connection.php");
 
                 $userID = $_SESSION['user']['userID'];

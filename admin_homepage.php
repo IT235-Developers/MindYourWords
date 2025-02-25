@@ -1,5 +1,6 @@
 <?php
 session_start(); // Start session at the top of the script
+include("auth/auth.php");
 include("connection.php");
 
 function setFlashMessage($type, $message) {

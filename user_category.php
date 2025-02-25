@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include("auth/auth.php");
     include("connection.php");
 
     if(isset($_POST['btn_cancel']) || isset($_POST['exit_window'])){
