@@ -12,8 +12,8 @@ class AuthController {
         $this->userModel = new User($pdo);
     }
 
-    public function signup($username, $email, $password) {
-        if ($this->userModel->register($username, $email, $password)) {
+    public function signup($username, $email, $password, $cpassword) {
+        if ($this->userModel->register($username, $email, $password, $cpassword)) {
             setFlashMessage("success", "Account registered successfully");
             header("Location: ../login.php");  // Redirect to login after successful signup
         } else {
