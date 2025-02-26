@@ -135,6 +135,9 @@
                                     p-1 text-center'>" . $wrongIcon . "" . strtolower($row["answer3"]) . "</div>";
                             }
 
+                            // This line prevents script injection by converting special characters to HTML entities
+                            $definition = htmlspecialchars($row["definition"], ENT_QUOTES, 'UTF-8');
+
                             echo "
                                 <tr>
                                     <td class='text-center'>" .$wordNumber. "</td>
