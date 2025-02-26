@@ -1,6 +1,7 @@
 <?php
 // User.php
 require_once __DIR__ . '/../database_connection/database.php';
+require_once __DIR__ . '/../../components/flash_message.php';
 
 class User {
     private $pdo;
