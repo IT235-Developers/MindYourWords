@@ -141,7 +141,9 @@
                             echo "
                                 <tr>
                                     <td class='text-center'>" .$wordNumber. "</td>
-                                    <td class='text-center'>". strtolower($row["word"]) ."</td>
+                                    <td class='text-center'>
+                                        <p style='margin-bottom: 0 !important;'data-bs-toggle='tooltip' data-bs-placement='top' title='".$definition."'>". strtolower($row["word"]) ."</p>
+                                    </td>
                                     <td>
                                         <div>".$answer1."</div>
                                         <div class='mt-1'>".$answer2."</div>
