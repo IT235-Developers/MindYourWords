@@ -98,7 +98,8 @@
                     $sqlGetAnswerWord = "SELECT a.answer1, a.answer2, a.answer3, a.points, q.word, q.definition FROM answer AS a 
                     INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID
                     INNER JOIN questions as q ON sc.word = q.word
-                    WHERE sc.levelHistoryID = '$levelHistoryID' and q.levelID = '$levelID';";
+                    WHERE sc.levelHistoryID = '$levelHistoryID' and q.levelID = '$levelID'
+                    ORDER BY sc.scoreCheckID;";
 
                     $resGetAnswerWord = $con->query($sqlGetAnswerWord);
                     $wordNumber = 1;
