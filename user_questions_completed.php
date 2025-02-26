@@ -95,9 +95,10 @@
                 <?php
                     include("connection.php");
 
-                    $sqlGetAnswerWord = "SELECT answer1, answer2, answer3, points, word FROM answer AS a 
-                    INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID AND 
-                    sc.levelHistoryID = '$levelHistoryID';";
+                    $sqlGetAnswerWord = "SELECT a.answer1, a.answer2, a.answer3, a.points, q.word, q.definition FROM answer AS a 
+                    INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID
+                    INNER JOIN questions as q ON sc.word = q.word
+                    WHERE sc.levelHistoryID = '$levelHistoryID' and q.levelID = '$levelID';";
 
                     $resGetAnswerWord = $con->query($sqlGetAnswerWord);
                     $wordNumber = 1;
