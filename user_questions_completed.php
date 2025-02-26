@@ -160,6 +160,11 @@
         </div>
         <a class="btn back float-end mt-3 me-2" href="user_homepage.php">Back</a>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        });
+    </script>
 </body>
 </html>
