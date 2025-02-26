@@ -17,7 +17,6 @@ class AuthController {
             setFlashMessage("success", "Account registered successfully");
             header("Location: ../login.php");  // Redirect to login after successful signup
         } else {
-            setFlashMessage("danger", "Sign-up registration failed. Please try again.");
             header("Location: ../sign_up.php");
         }
     }
