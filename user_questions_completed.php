@@ -95,9 +95,11 @@
                 <?php
                     include("connection.php");
 
-                    $sqlGetAnswerWord = "SELECT answer1, answer2, answer3, points, word FROM answer AS a 
-                    INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID AND 
-                    sc.levelHistoryID = '$levelHistoryID';";
+                    $sqlGetAnswerWord = "SELECT a.answer1, a.answer2, a.answer3, a.points, q.word, q.definition FROM answer AS a 
+                    INNER JOIN score_check AS sc ON a.scoreCheckID = sc.scoreCheckID
+                    INNER JOIN questions as q ON sc.word = q.word
+                    WHERE sc.levelHistoryID = '$levelHistoryID' and q.levelID = '$levelID'
+                    ORDER BY sc.scoreCheckID;";
 
                     $resGetAnswerWord = $con->query($sqlGetAnswerWord);
                     $wordNumber = 1;
@@ -134,10 +136,15 @@
                                     p-1 text-center'>" . $wrongIcon . "" . strtolower($row["answer3"]) . "</div>";
                             }
 
+                            // This line prevents script injection by converting special characters to HTML entities
+                            $definition = htmlspecialchars($row["definition"], ENT_QUOTES, 'UTF-8');
+
                             echo "
                                 <tr>
                                     <td class='text-center'>" .$wordNumber. "</td>
-                                    <td class='text-center'>". strtolower($row["word"]) ."</td>
+                                    <td class='text-center'>
+                                        <p style='margin-bottom: 0 !important;'data-bs-toggle='tooltip' data-bs-placement='top' title='".$definition."'>". strtolower($row["word"]) ."</p>
+                                    </td>
                                     <td>
                                         <div>".$answer1."</div>
                                         <div class='mt-1'>".$answer2."</div>
@@ -159,6 +166,11 @@
         </div>
         <a class="btn back float-end mt-3 me-2" href="user_homepage.php">Back</a>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        });
+    </script>
 </body>
 </html>
