@@ -151,7 +151,7 @@
                                         <div class='mt-1'>".$answer2."</div>
                                         <div class='mt-1'>".$answer3."</div>
                                     </td>
-                                    <td class='text-center'>". ($row['points'] > 0 ? "<span class='text-success'>".$row['points']." pts</span>" : "<span class='text-danger'>0 pts</span>") ."</td>
+                                    <td class='text-center'>". ($row['points'] > 1 ? "<span class='text-success'>".$row['points']." pts</span>" : ($row['points'] == 1 ? "<span class='text-success'>1 pt</span>" : "<span class='text-danger'>0 pt</span>")) ."</td>
                                 </tr>
                             ";
 
