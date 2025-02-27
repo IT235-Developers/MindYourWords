@@ -73,13 +73,10 @@ if ($auth->isLoggedIn()) {
 
           <input type="submit" class="btn w-100 btn-primary mt-2 p-2" value="Sign Up">
           
-          <p class="mt-3 text-center">Already have an account? <a href="login.php">Login here</a></p>
+          <p class="mt-3 text-center">Already have an account? <a href="login.php" id="btn_login">Login here</a></p>
         </form>
       </div>
-    
-      
     </div>
-
     <script src="auth/validation/sign_up_script.js"></script>
   </body>
 </html>
