@@ -157,7 +157,6 @@
 
             const correctSound = new Audio("resources/audios/correct_audio.mp3");
             const wrongSound = new Audio("resources/audios/wrong_audio.mp3");
-            const questionCompletedSound = new Audio("resources/audios/question_completed.wav");
 
             let attemptsArray = [];
 
@@ -264,7 +263,6 @@
                     })
                     .catch(error => console.error('Error updating level history score:', error));
                     
-                    questionCompletedSound.play();
                 }
             }
 
