@@ -45,13 +45,13 @@ if (isset($_POST['btn_login'])) {
 				<form action="" method="POST">
 					<div class="form-group">
 						<label for="txt_email"></label>
-						<input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" required/>
+						<input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control"/>
 					</div>
 
 					<div class="form-group">
 						<label for="txt_password"></label>
 						<div class="input-group">
-							<input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" required/>
+							<input type="Password" id="txt_password" name="txt_password" placeholder="Password" class="form-control"/>
 							<span class="input-group-text" id="togglePassword" style="cursor: pointer;">
 								<i class="bi bi-eye"></i>
 							</span>
