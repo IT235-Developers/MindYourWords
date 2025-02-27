@@ -30,11 +30,6 @@
                 <li>Users agree to use the game in a lawful manner and not to upload, share, or promote any content that is offensive, harmful, or illegal.</li>
             </ul>
 
-            <h6>User Content</h6>
-            <ul>
-                <li>Users can submit and share content on the platform, granting MindYourWords a non-exclusive, worldwide, royalty-free license to use and display it. Users are responsible for ensuring their content doesn’t violate any rights or laws.</li>
-            </ul>
-
             <h6>Limitations and Liability</h6>
             <ul>
                 <li>MindYourWords is not liable for any direct or indirect damages, losses, or harm resulting from the use of the game.</li>
@@ -44,7 +39,6 @@
             <h6>Prohibited Activities</h6>
             <ul>
                 <li>Avoid typing unnecessary, rude and malicious types of words.</li>
-                <li>Uploading or sharing content that is harmful, offensive, or illegal.</li>
             </ul>
 
             <h6>Privacy and Data Security</h6>
