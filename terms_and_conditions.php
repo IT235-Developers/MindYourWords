@@ -19,9 +19,8 @@
         <div class="content">
             <h6>Purpose</h6>
             <ul>
-                <li>Use the platform in accordance with these terms and applicable rules and regulations.</li>
-                <li>Participate in tests and challenges without cheating.</li>
-                <li>Users agree to use the game in a lawful manner and not to upload, share, or promote any content that is offensive, harmful, or illegal.</li>
+                <li>MindYourWords is a web-based game platform designed to help learner’s enhance and practice their English vocabulary and spelling skills.</li>
+                <li>A gamified learning with dynamic and effective approach designed to engage and motivate learners to participate in assessments.</li>
             </ul>
 
             <h6>User Responsibilities</h6>
