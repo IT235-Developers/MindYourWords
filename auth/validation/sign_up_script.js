@@ -34,7 +34,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('btn_login').addEventListener('click', function(event) {
         event.preventDefault();
+        clearUserInfoAndRedirect();
+        
+    });
 
+    window.onbeforeunload = function() {
+        clearUserInfoAndRedirect();
+    };
+
+    function clearUserInfoAndRedirect() {
         // Send fetch request to clear session variables
         fetch('auth/clear_session.php', {
             method: 'GET',
@@ -52,5 +60,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             })
             .catch(error => console.error('Error:', error));
-    });
+    }
 });
