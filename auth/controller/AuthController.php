@@ -12,12 +12,14 @@ class AuthController {
         $this->userModel = new User($pdo);
     }
 
-    public function signup($username, $email, $password) {
-        if ($this->userModel->register($username, $email, $password)) {
+    public function signup($username, $email, $password, $cpassword) {
+        $this->storeUserInformation($username, $email, $password, $cpassword);
+
+        if ($this->userModel->register($username, $email, $password, $cpassword)) {
             setFlashMessage("success", "Account registered successfully");
+            $this->clearUserInformation();
             header("Location: ../login.php");  // Redirect to login after successful signup
         } else {
-            setFlashMessage("danger", "Sign-up registration failed. Please try again.");
             header("Location: ../sign_up.php");
         }
     }
@@ -53,16 +55,34 @@ class AuthController {
             return false;
         } 
     }
-  
+
     public function isLoggedIn() {
         if (isset($_SESSION["user"])) {
             return true;
         }
         return false;
     }
-  
+
     public function setUserSession() {
         $_SESSION['user'] = $this->user;
+    }
+
+    // Stores the information of user to session so that it can be used to
+    // retain data in sign-up fields
+    private function storeUserInformation($username, $email, $password, $cpassword) {
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        $_SESSION['cpassword'] = $cpassword;
+    }
+
+    // Clears the information stored in session when sign-up registration
+    // is successful
+    public function clearUserInformation() {
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        unset($_SESSION['password']);
+        unset($_SESSION['cpassword']);
     }
 }
 ?>
