@@ -54,6 +54,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
     <link rel="stylesheet" type="text/css" href="user_statistics_styles.css">
+    <link rel="icon" type="image/svg+xml" href="images/myw_favicon.svg">
     <title>MindYourWords Statistics</title>
 </head>
 <body class="bg-img-gif">
