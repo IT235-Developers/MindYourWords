@@ -23,6 +23,7 @@ if (!$auth->checkIfAdmin()) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
+    <link rel="icon" type="image/svg+xml" href="images/myw-primary-logo.svg">
 </head>
 <body class="bg-img">
     <div class="container-fluid secondary_container">
