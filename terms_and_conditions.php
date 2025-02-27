@@ -8,7 +8,7 @@
 	<title>Terms and Cons</title>
 </head>
 </head>
-<body>
+<body class="bg-img-gif">
     <div class="container-fluid main_container">
         <h4 id="heading">Terms and Conditions</h4>
 

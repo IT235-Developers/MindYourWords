@@ -24,7 +24,7 @@ if (!$auth->checkIfAdmin()) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/admin_styles.css">
 </head>
-<body class="bg-img">
+<body class="bg-img-gif">
     <div class="container-fluid secondary_container">
         <div class="row">
             <img src="images/myw-secondary-logo.svg" class="secondary_logo">
