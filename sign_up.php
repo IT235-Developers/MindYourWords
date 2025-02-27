@@ -15,7 +15,6 @@ if ($auth->isLoggedIn()) {
         exit();
 	}
 }
-
 ?>
 
 <html lang="en">
@@ -42,18 +41,18 @@ if ($auth->isLoggedIn()) {
         <form id="signupForm" action="auth/sign_up.php" method="POST">
           <div class="form-group">
             <label for="txt_username"></label>
-            <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control"/>
+            <input type="text" id="txt_username" name="txt_username" placeholder="Username" class="form-control" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>"/>
           </div>
 
           <div class="form-group">
             <label for="txt_email"></label>
-            <input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control"/>
+            <input type="text" id="txt_email" name="txt_email" placeholder="Email Address" class="form-control" value="<?php echo isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>"/>
           </div>
 
           <div class="form-group">
             <label for="txt_password"></label>
             <div class="input-group">
-              <input type="password" id="txt_password" name="txt_password" placeholder="Password" class="form-control"/>
+              <input type="password" id="txt_password" name="txt_password" placeholder="Password" class="form-control" value="<?php echo isset($_SESSION['password']) ? htmlspecialchars($_SESSION['password']) : ''; ?>"/>
               <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
                 <i class="bi bi-eye"></i>
               </span>
@@ -63,7 +62,7 @@ if ($auth->isLoggedIn()) {
           <div class="form-group">
             <label for="txt_cpassword"></label>
             <div class="input-group">
-              <input type="password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control"/>
+              <input type="password" id="txt_cpassword" name="txt_cpassword" placeholder="Confirm Password" class="form-control" value="<?php echo isset($_SESSION['cpassword']) ? htmlspecialchars($_SESSION['cpassword']) : ''; ?>"/>
               <span class="input-group-text" id="toggleCPassword" style="cursor: pointer;">
                 <i class="bi bi-eye"></i>
               </span>
