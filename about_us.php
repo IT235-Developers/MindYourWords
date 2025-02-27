@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styles/about_us.css">
 	<title>About the Developers</title>
 </head>
-<body>
+<body class="bg-img-gif">
     <div class="container-fluid main_container">
         <h4 id="heading">About MindYourWords</h4>
 
